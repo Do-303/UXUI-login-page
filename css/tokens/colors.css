@@ -20,10 +20,12 @@
   --palette-black:#000000;
   --palette-kakao:#FEE500;
   --palette-naver:#03C75A;
+  --palette-warm-400:#A99F97;
 
   /* 2-1) 글자색 */
   --color-text-primary:var(--palette-warm-900);
   --color-text-secondary:var(--palette-warm-500);
+  --color-text-tertiary:var(--palette-warm-400);
   --color-text-brand:var(--palette-terracotta-500);
   --color-text-error:var(--palette-red-600);
   --color-text-success:var(--palette-green-700);
