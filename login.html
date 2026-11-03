@@ -18,46 +18,42 @@
 <main class="wrap">
   <div class="top">
     <span class="top-spacer"></span>
-    <span class="logo">모아집</span>
+    <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>모아집</span>
     <span class="top-spacer"></span>
   </div>
 
   <div class="card">
     <!-- 로그인 -->
     <section id="login">
-      <h1>다시 만나서 반가워요</h1>
-      <p class="lead">이메일과 비밀번호로 로그인해 주세요.</p>
-      <p class="req-note"><b>*</b> 표시는 필수 입력 항목이에요</p>
-      <form id="form" novalidate>
+      <h1>다시 만나 반가워요</h1>
+      <p class="lead">로그인하고 나만의 공간을 채워보세요.</p>
+      <form id="form" class="login-form" novalidate>
         <div class="field" data-name="email">
-          <label class="lb" for="email">이메일 <span class="req">*</span></label>
+          <label class="lb" for="email">이메일</label>
           <div class="input"><input id="email" type="email" autocomplete="email" placeholder="example@moajip.com"></div>
           <p class="msg" aria-live="polite"></p>
         </div>
         <div class="field" data-name="pw">
-          <label class="lb" for="pw">비밀번호 <span class="req">*</span></label>
+          <label class="lb" for="pw">비밀번호</label>
           <div class="input">
             <input id="pw" type="password" autocomplete="current-password" placeholder="비밀번호를 입력해 주세요">
             <button type="button" class="eye" data-target="pw" aria-label="비밀번호 보기" aria-pressed="false"></button>
           </div>
           <p class="msg" aria-live="polite"></p>
         </div>
-        <div class="opts">
-          <label><input type="checkbox" id="keep"> 로그인 상태 유지</label>
-          <a class="link" href="#">비밀번호 찾기</a>
-        </div>
         <p class="alert" id="alert" role="alert"></p>
         <button class="cta" type="submit">로그인</button>
       </form>
+      <div class="find-links"><a href="#">이메일 찾기</a><span class="bar" aria-hidden="true"></span><a href="#">비밀번호 찾기</a></div>
 
       <div class="divider">또는 간편 로그인</div>
-      <div class="social">
-        <button class="kakao" aria-label="카카오로 로그인">K</button>
-        <button class="naver" aria-label="네이버로 로그인">N</button>
-        <button class="apple" aria-label="애플로 로그인">A</button>
-        <button class="google" aria-label="구글로 로그인">G</button>
+      <div class="sns">
+        <button type="button" class="sns-item" aria-label="카카오톡로 로그인"><span class="sns-icon kakao"><svg width="26" height="24" viewBox="0 0 26 24" fill="none" aria-hidden="true"><path d="M13 3.00043C6.92366 3.00043 1.99939 6.82573 1.99939 11.5441C1.99939 14.5964 4.0565 17.2746 7.15267 18.7837L6.10561 22.634C6.01261 22.975 6.40163 23.2461 6.69965 23.048L11.2869 20.0038C11.8469 20.0738 12.419 20.1098 13 20.1098C19.0753 20.1098 24.0006 16.2845 24.0006 11.5651C24.0006 6.82573 19.0753 3.00043 13 3.00043Z" fill="#191919"/></svg></span>카카오톡</button>
+        <button type="button" class="sns-item" aria-label="네이버로 로그인"><span class="sns-icon naver"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M13.5603 0V10.7037L6.13642 0H0V19.9992H6.43891V9.29546L13.8628 19.9992H19.9992V0H13.5603Z" fill="#FFFFFF"/></svg></span>네이버</button>
+        <button type="button" class="sns-item" aria-label="애플로 로그인"><span class="sns-icon apple"><svg width="24" height="26" viewBox="0 0 24 26" fill="none" aria-hidden="true"><path d="M17.0517 21.2789C16.0717 22.2289 15.0016 22.0789 13.9716 21.6289C12.8816 21.1689 11.8815 21.1489 10.7315 21.6289C9.29144 22.2489 8.53141 22.0689 7.67138 21.2789C2.7912 16.2489 3.51123 8.58881 9.05143 8.30881C10.4015 8.37881 11.3415 9.04882 12.1315 9.10882C13.3116 8.86881 14.4416 8.17881 15.7017 8.26881C17.2117 8.38881 18.3518 8.98881 19.1018 10.0688C15.9817 11.9388 16.7217 16.0489 19.5818 17.1989C19.0118 18.6989 18.2718 20.1889 17.0417 21.2889L17.0517 21.2789ZM12.0315 8.24881C11.8815 6.01879 13.6916 4.17878 15.7717 3.99878C16.0617 6.5788 13.4316 8.49881 12.0315 8.24881Z" fill="#FFFFFF"/></svg></span>애플</button>
+        <button type="button" class="sns-item" aria-label="구글로 로그인"><span class="sns-icon google"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21.8069 12.2312C21.8069 11.5511 21.7469 10.9011 21.6319 10.271H12.0016V13.9813H17.5018C17.3887 14.6077 17.1495 15.2046 16.7989 15.7358C16.4482 16.2671 15.9933 16.7215 15.4617 17.0716V19.6418H18.7668C20.7019 17.8617 21.8069 15.2364 21.8069 12.2312Z" fill="#4285F4"/><path d="M12.0008 22.0031C14.7012 22.0031 16.9665 21.108 18.6217 19.5777L15.3162 17.0074C14.4011 17.6224 13.231 17.9925 12.0008 17.9925C9.39045 17.9925 7.17016 16.2322 6.37505 13.8619H2.95959V16.5123C3.80272 18.1812 5.09678 19.5803 6.69489 20.5508C8.29301 21.5214 10.1312 22.0245 12.0008 22.0031Z" fill="#34A853"/><path d="M6.37525 13.8617C6.17281 13.2621 6.06648 12.6344 6.06021 12.0016C6.06021 11.3566 6.17023 10.7315 6.37525 10.1415V7.49139H2.95982C2.29277 8.89948 1.96399 10.4439 1.9997 12.0016C1.9997 13.6167 2.38475 15.1467 2.95982 16.5118L6.37525 13.8617Z" fill="#FBBC05"/><path d="M12.0018 6.01071C13.4722 6.01071 14.7875 6.51579 15.8278 7.50594L18.6985 4.6355C16.8923 2.92222 14.4913 1.97732 12.0018 2.00011C10.132 1.97871 8.29362 2.48184 6.69532 3.45239C5.09702 4.42295 3.80282 5.82206 2.95959 7.49094L6.37544 10.1413C7.17064 7.77098 9.39119 6.01071 12.0018 6.01071Z" fill="#EA4335"/></svg></span>구글</button>
       </div>
-      <p class="login">아직 회원이 아닌가요? <a href="index.html">회원가입</a></p>
+      <p class="login">아직 계정이 없나요? <a href="index.html">회원가입</a></p>
     </section>
 
     <!-- 로그인 완료 -->
