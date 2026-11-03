@@ -5,17 +5,17 @@
    ========================================================== */
 :root{
   /* 1) 팔레트 */
-  --palette-terracotta-500:#B5532F;
-  --palette-terracotta-600:#984323;
-  --palette-terracotta-50:#FBEFE8;
-  --palette-warm-900:#2B2623;
-  --palette-warm-500:#7A716B;
-  --palette-warm-200:#E4DCD3;
-  --palette-warm-300:#D9CFC6;
-  --palette-warm-50:#FAF6F0;
+  --palette-terracotta-500:#35C5F0;
+  --palette-terracotta-600:#25A8D2;
+  --palette-terracotta-50:#E0F6FE;
+  --palette-warm-900:#191919;
+  --palette-warm-500:#555555;
+  --palette-warm-200:#E0E0E0;
+  --palette-warm-300:#C7C7C7;
+  --palette-warm-50:#FAFAFA;
   --palette-white:#FFFFFF;
-  --palette-red-600:#D92D20;
-  --palette-green-700:#2E7D4F;
+  --palette-red-600:#FF3838;
+  --palette-green-700:#1AAD5C;
   --palette-gray-700:#444444;
   --palette-black:#000000;
   --palette-kakao:#FEE500;
