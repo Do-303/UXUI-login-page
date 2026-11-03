@@ -1,5 +1,7 @@
 /* 레이아웃·컴포넌트 스타일 — 값은 모두 css/tokens/ 의 변수를 사용해요 */
 *{box-sizing:border-box}
+/* 버튼·입력창도 사이트 글꼴을 쓰도록 (브라우저 기본 글꼴 대신) */
+button,input{font-family:inherit}
 /* 줄 높이: 피그마처럼 글자 크기 × 비율을 정수 px로 반올림 (예: 13px → 20px). 지원 안 되는 브라우저는 그냥 150% */
 *{line-height:round(nearest, calc(1em * var(--line-height-body)), 1px)}
 body{margin:0;line-height:var(--line-height-body);font-family:var(--font-family-base);color:var(--color-text-primary);background:var(--color-bg-page)}
@@ -53,7 +55,7 @@ input:focus{border-color:var(--color-border-brand);box-shadow:var(--focus-ring)}
 .msg{min-height:var(--space-18);margin:var(--space-6) 0 0;font-size:var(--font-size-12);color:var(--color-text-secondary)}
 .field.invalid .msg{color:var(--color-text-error)}
 .field.valid .msg{color:var(--color-text-success)}
-.btn-sub{height:var(--size-input-height);padding:0 var(--space-14);border:var(--size-hairline) solid var(--color-border-brand);color:var(--color-text-brand);background:var(--color-bg-surface);border-radius:var(--radius-sm);font-weight:var(--font-weight-bold);cursor:pointer;white-space:nowrap}
+.btn-sub{height:var(--size-input-height);padding:0 var(--space-14);font-size:var(--font-size-14);border:var(--size-hairline) solid var(--color-border-brand);color:var(--color-text-brand);background:var(--color-bg-surface);border-radius:var(--radius-sm);font-weight:var(--font-weight-bold);cursor:pointer;white-space:nowrap}
 .lb-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6)}
 .lb-row label.lb{margin-bottom:0}
 .btn-text{border:0;background:none;padding:0;font-family:inherit;font-size:var(--font-size-12);line-height:round(nearest, calc(1em * var(--line-height-tight)), 1px);font-weight:var(--font-weight-bold);color:var(--color-text-brand);text-decoration:underline;cursor:pointer}
