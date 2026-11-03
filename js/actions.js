@@ -18,13 +18,14 @@ const terms = [...document.querySelectorAll('.term')];
 const reqTerms = terms.filter(t => t.dataset.req);
 function syncTerms() {
   $('#all').checked = terms.every(t => t.checked);
+  $('#reqOnly').checked = terms.every(t => t.checked === !!t.dataset.req);
   const ok = reqTerms.every(t => t.checked);
   $('#next1').disabled = !ok;
   $('#hint1').textContent = ok ? '' : '필수 약관에 동의하면 다음으로 넘어갈 수 있어요.';
 }
 $('#all').addEventListener('change', e => { terms.forEach(t => t.checked = e.target.checked); syncTerms(); });
 terms.forEach(t => t.addEventListener('change', syncTerms));
-$('#reqOnly').addEventListener('click', () => { terms.forEach(t => t.checked = !!t.dataset.req); syncTerms(); });
+$('#reqOnly').addEventListener('change', e => { terms.forEach(t => t.checked = e.target.checked && !!t.dataset.req); syncTerms(); });
 $('#reset').addEventListener('click', () => { terms.forEach(t => t.checked = false); syncTerms(); });
 document.querySelectorAll('.view').forEach(a => a.addEventListener('click', e => e.preventDefault()));
 $('#next1').addEventListener('click', () => go(2));
