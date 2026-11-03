@@ -44,6 +44,9 @@ input:focus{border-color:var(--color-border-brand);box-shadow:var(--focus-ring)}
 .field.invalid .msg{color:var(--color-text-error)}
 .field.valid .msg{color:var(--color-text-success)}
 .btn-sub{height:var(--size-input-height);padding:0 var(--space-14);border:var(--size-hairline) solid var(--color-border-brand);color:var(--color-text-brand);background:var(--color-bg-surface);border-radius:var(--radius-sm);font-weight:var(--font-weight-bold);cursor:pointer;white-space:nowrap}
+.lb-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-6)}
+.lb-row label.lb{margin-bottom:0}
+.btn-text{border:0;background:none;padding:0;font-size:var(--font-size-12);font-weight:var(--font-weight-bold);color:var(--color-text-brand);text-decoration:underline;cursor:pointer}
 .cta{width:100%;height:var(--size-cta-height);margin-top:var(--space-8);border:0;border-radius:var(--radius-md);background:var(--color-bg-brand);color:var(--color-text-inverse);font-size:var(--font-size-16);font-weight:var(--font-weight-bold);cursor:pointer}
 .cta:hover:not(:disabled){background:var(--color-bg-brand-hover)}
 .cta:disabled{background:var(--color-bg-disabled);cursor:not-allowed}
