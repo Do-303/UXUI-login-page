@@ -92,7 +92,10 @@
           <p class="msg" aria-live="polite"></p>
         </div>
         <div class="field" data-name="nick">
-          <label class="lb" for="nick">닉네임 <span class="req">*</span></label>
+          <div class="lb-row">
+            <label class="lb" for="nick">닉네임 <span class="req">*</span></label>
+            <button type="button" class="btn-text" id="nickAuto">자동으로 정하기</button>
+          </div>
           <div class="row">
             <div class="input"><input id="nick" type="text" maxlength="15" placeholder="2~15자"></div>
             <button type="button" class="btn-sub" id="nickCheck">중복확인</button>

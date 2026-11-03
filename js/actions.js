@@ -60,6 +60,14 @@ for (const n of ['email', 'pw', 'pw2', 'nick']) {
   });
   input.addEventListener('blur', () => show(n));
 }
+/* 닉네임 자동으로 정하기: 형용사 + 인테리어 소품 + 숫자 4자리 (최대 12자) */
+const NICK_WORDS = [['포근한', '아늑한', '산뜻한', '느긋한', '따뜻한', '말랑한', '단정한', '반짝이는'], ['소파', '쿠션', '러그', '화분', '조명', '식탁', '커튼', '머그컵']];
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+$('#nickAuto').addEventListener('click', () => {
+  $('#nick').value = pick(NICK_WORDS[0]) + pick(NICK_WORDS[1]) + (1000 + Math.floor(Math.random() * 9000));
+  touched.nick = true; nickOk = true; show('nick', true);
+  f('nick').querySelector('.msg').textContent = '자동으로 정했어요. 다시 누르면 바뀌고, 직접 고쳐도 돼요.';
+});
 $('#nickCheck').addEventListener('click', () => {
   touched.nick = true;
   const v = val('nick').trim(), el = f('nick'), msg = el.querySelector('.msg');
