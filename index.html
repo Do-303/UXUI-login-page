@@ -48,10 +48,10 @@
 <body>
 <main class="wrap">
   <h1>모아집</h1>
-  <p class="lead">이메일로 간단하게 가입하세요</p>
+  <p class="lead">이메일로 간단하게 가입해 보세요</p>
 
   <form id="form" novalidate>
-    <p class="req-note"><b>*</b> 표시는 필수 입력 항목입니다</p>
+    <p class="req-note"><b>*</b> 표시는 필수 입력 항목이에요</p>
 
     <div class="field" data-name="email">
       <label class="lb" for="email">이메일 <span class="req">*</span></label>
@@ -90,7 +90,7 @@
       <legend>약관 동의</legend>
       <div class="terms">
         <label class="t all"><input type="checkbox" id="all"> 전체 동의</label>
-        <label class="t"><input type="checkbox" class="term" data-req="1"> 만 14세 이상입니다 <span class="tag must">필수</span></label>
+        <label class="t"><input type="checkbox" class="term" data-req="1"> 만 14세 이상이에요 <span class="tag must">필수</span></label>
         <label class="t"><input type="checkbox" class="term" data-req="1"> 이용약관 <span class="tag must">필수</span></label>
         <label class="t"><input type="checkbox" class="term" data-req="1"> 개인정보 수집·이용 <span class="tag must">필수</span></label>
         <label class="t"><input type="checkbox" class="term"> 마케팅 활용 동의 <span class="tag">선택</span></label>
@@ -128,7 +128,7 @@ const rules = {
   nick: () => {
     const v = val('nick').trim();
     if (v.length < 2) return '닉네임은 2자 이상이에요.';
-    return nickOk ? '' : '닉네임 중복확인을 해주세요.';
+    return nickOk ? '' : '닉네임 중복확인을 해 주세요.';
   }
 };
 const okText = { email: '', pw: '사용 가능한 비밀번호예요.', pw2: '비밀번호가 일치해요.', nick: '사용 가능한 닉네임이에요.' };
