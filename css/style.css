@@ -19,7 +19,7 @@ body{margin:0;line-height:var(--line-height-body);font-family:var(--font-family-
 .steps li.on::before,.steps li.done::before{background:var(--color-bg-brand)}
 .steps li.done{color:var(--color-text-primary)}
 .card{background:var(--color-bg-surface);border-radius:var(--radius-lg);padding:var(--space-28) var(--space-22);margin-top:var(--space-14);box-shadow:var(--shadow-card)}
-.top + .card{margin-top:var(--space-24)}
+.steps[hidden] + .card{margin-top:var(--space-24)}
 h1{font-size:var(--font-size-22);line-height:var(--line-height-title);margin:0 0 var(--space-6)}
 .lead{margin:0 0 var(--space-16);color:var(--color-text-secondary);font-size:var(--font-size-14);line-height:var(--line-height-body)}
 #login .lead{margin-bottom:var(--space-24)}

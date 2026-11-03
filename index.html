@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>모아집 로그인</title>
+<title>모아집</title>
 <!-- 디자인 시스템 토큰 -->
 <link rel="stylesheet" href="css/tokens/colors.css">
 <link rel="stylesheet" href="css/tokens/typography.css">
@@ -17,31 +17,35 @@
 <body>
 <main class="wrap">
   <div class="top">
-    <span class="top-spacer"></span>
+    <button class="back" id="back" type="button" hidden>← 이전</button>
     <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>모아집</span>
     <span class="top-spacer"></span>
   </div>
+
+  <ol class="steps" id="steps" aria-label="가입 단계" hidden>
+    <li class="on">약관 동의</li><li>정보 입력</li><li>가입 완료</li>
+  </ol>
 
   <div class="card">
     <!-- 로그인 -->
     <section id="login">
       <h1>다시 만나 반가워요</h1>
       <p class="lead">로그인하고 나만의 공간을 채워보세요.</p>
-      <form id="form" class="login-form" novalidate>
-        <div class="field" data-name="email">
-          <label class="lb" for="email">이메일</label>
-          <div class="input"><input id="email" type="email" autocomplete="email" placeholder="example@moajip.com"></div>
+      <form id="loginForm" class="login-form" novalidate>
+        <div class="field" data-name="loginEmail">
+          <label class="lb" for="loginEmail">이메일</label>
+          <div class="input"><input id="loginEmail" type="email" autocomplete="email" placeholder="example@moajip.com"></div>
           <p class="msg" aria-live="polite"></p>
         </div>
-        <div class="field" data-name="pw">
-          <label class="lb" for="pw">비밀번호</label>
+        <div class="field" data-name="loginPw">
+          <label class="lb" for="loginPw">비밀번호</label>
           <div class="input">
-            <input id="pw" type="password" autocomplete="current-password" placeholder="비밀번호를 입력해 주세요">
-            <button type="button" class="eye" data-target="pw" aria-label="비밀번호 보기" aria-pressed="false"></button>
+            <input id="loginPw" type="password" autocomplete="current-password" placeholder="비밀번호를 입력해 주세요">
+            <button type="button" class="eye" data-target="loginPw" aria-label="비밀번호 보기" aria-pressed="false"></button>
           </div>
           <p class="msg" aria-live="polite"></p>
         </div>
-        <p class="alert" id="alert" role="alert"></p>
+        <p class="alert" id="loginAlert" role="alert"></p>
         <button class="cta" type="submit">로그인</button>
       </form>
       <div class="find-links"><a href="#">이메일 찾기</a><span class="bar" aria-hidden="true"></span><a href="#">비밀번호 찾기</a></div>
@@ -53,7 +57,7 @@
         <button type="button" class="sns-item" aria-label="애플로 로그인"><span class="sns-icon apple"><svg width="24" height="26" viewBox="0 0 24 26" fill="none" aria-hidden="true"><path d="M17.0517 21.2789C16.0717 22.2289 15.0016 22.0789 13.9716 21.6289C12.8816 21.1689 11.8815 21.1489 10.7315 21.6289C9.29144 22.2489 8.53141 22.0689 7.67138 21.2789C2.7912 16.2489 3.51123 8.58881 9.05143 8.30881C10.4015 8.37881 11.3415 9.04882 12.1315 9.10882C13.3116 8.86881 14.4416 8.17881 15.7017 8.26881C17.2117 8.38881 18.3518 8.98881 19.1018 10.0688C15.9817 11.9388 16.7217 16.0489 19.5818 17.1989C19.0118 18.6989 18.2718 20.1889 17.0417 21.2889L17.0517 21.2789ZM12.0315 8.24881C11.8815 6.01879 13.6916 4.17878 15.7717 3.99878C16.0617 6.5788 13.4316 8.49881 12.0315 8.24881Z" fill="#FFFFFF"/></svg></span>애플</button>
         <button type="button" class="sns-item" aria-label="구글로 로그인"><span class="sns-icon google"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21.8069 12.2312C21.8069 11.5511 21.7469 10.9011 21.6319 10.271H12.0016V13.9813H17.5018C17.3887 14.6077 17.1495 15.2046 16.7989 15.7358C16.4482 16.2671 15.9933 16.7215 15.4617 17.0716V19.6418H18.7668C20.7019 17.8617 21.8069 15.2364 21.8069 12.2312Z" fill="#4285F4"/><path d="M12.0008 22.0031C14.7012 22.0031 16.9665 21.108 18.6217 19.5777L15.3162 17.0074C14.4011 17.6224 13.231 17.9925 12.0008 17.9925C9.39045 17.9925 7.17016 16.2322 6.37505 13.8619H2.95959V16.5123C3.80272 18.1812 5.09678 19.5803 6.69489 20.5508C8.29301 21.5214 10.1312 22.0245 12.0008 22.0031Z" fill="#34A853"/><path d="M6.37525 13.8617C6.17281 13.2621 6.06648 12.6344 6.06021 12.0016C6.06021 11.3566 6.17023 10.7315 6.37525 10.1415V7.49139H2.95982C2.29277 8.89948 1.96399 10.4439 1.9997 12.0016C1.9997 13.6167 2.38475 15.1467 2.95982 16.5118L6.37525 13.8617Z" fill="#FBBC05"/><path d="M12.0018 6.01071C13.4722 6.01071 14.7875 6.51579 15.8278 7.50594L18.6985 4.6355C16.8923 2.92222 14.4913 1.97732 12.0018 2.00011C10.132 1.97871 8.29362 2.48184 6.69532 3.45239C5.09702 4.42295 3.80282 5.82206 2.95959 7.49094L6.37544 10.1413C7.17064 7.77098 9.39119 6.01071 12.0018 6.01071Z" fill="#EA4335"/></svg></span>구글</button>
       </div>
-      <p class="login">아직 계정이 없나요? <a href="signup.html">회원가입</a></p>
+      <p class="login">아직 계정이 없나요? <a href="#signup">회원가입</a></p>
     </section>
 
     <!-- 로그인 완료 -->
@@ -65,10 +69,83 @@
         <button class="cta" type="button" onclick="location.reload()">쇼핑 시작하기</button>
       </div>
     </section>
+    <!-- 1단계: 약관 동의 -->
+    <section id="s1" hidden>
+      <h1>모아집에 오신 걸 환영해요</h1>
+      <p class="lead">가입을 위해 약관을 확인해 주세요.</p>
+      <div class="terms">
+        <div class="all-row">
+          <label class="t all"><input type="checkbox" id="all"> 전체 동의</label>
+          <label class="t all"><input type="checkbox" id="reqOnly"> 필수 항목만 동의</label>
+        </div>
+        <label class="t"><input type="checkbox" class="term" data-req="1"> 만 14세 이상이에요 <span class="tag must">필수</span></label>
+        <label class="t"><input type="checkbox" class="term" data-req="1"> 이용약관 <span class="tag must">필수</span> <a class="view" href="#">보기</a></label>
+        <label class="t"><input type="checkbox" class="term" data-req="1"> 개인정보 수집·이용 <span class="tag must">필수</span> <a class="view" href="#">보기</a></label>
+        <label class="t"><input type="checkbox" class="term"> 마케팅 활용 동의 <span class="tag">선택</span> <a class="view" href="#">보기</a></label>
+        <label class="t"><input type="checkbox" class="term"> 이벤트·쿠폰·특가 알림 <span class="tag">선택</span> <a class="view" href="#">보기</a></label>
+      </div>
+      <button type="button" class="terms-reset" id="reset">선택 해제</button>
+      <button class="cta" id="next1" type="button" disabled>다음</button>
+      <p class="hint" id="hint1">필수 약관에 동의하면 다음으로 넘어갈 수 있어요.</p>
+    </section>
+
+    <!-- 2단계: 정보 입력 -->
+    <section id="s2" hidden>
+      <h1>계정 정보를 입력해 주세요</h1>
+      <p class="lead">이메일과 비밀번호만 있으면 돼요.</p>
+      <p class="req-note"><b>*</b> 표시는 필수 입력 항목이에요</p>
+      <form id="form" novalidate>
+        <div class="field" data-name="email">
+          <label class="lb" for="email">이메일 <span class="req">*</span></label>
+          <div class="input"><input id="email" type="email" autocomplete="email" placeholder="example@moajip.com"></div>
+          <p class="msg" aria-live="polite"></p>
+        </div>
+        <div class="field" data-name="pw">
+          <label class="lb" for="pw">비밀번호 <span class="req">*</span></label>
+          <div class="input">
+            <input id="pw" type="password" autocomplete="new-password" placeholder="비밀번호를 입력해 주세요">
+            <button type="button" class="eye" data-target="pw" aria-label="비밀번호 보기" aria-pressed="false"></button>
+          </div>
+          <p class="msg" aria-live="polite">8자 이상, 영문과 숫자를 함께 사용해 주세요.</p>
+        </div>
+        <div class="field" data-name="pw2">
+          <label class="lb" for="pw2">비밀번호 확인 <span class="req">*</span></label>
+          <div class="input">
+            <input id="pw2" type="password" autocomplete="new-password" placeholder="비밀번호를 한 번 더 입력해 주세요">
+            <button type="button" class="eye" data-target="pw2" aria-label="비밀번호 확인 보기" aria-pressed="false"></button>
+          </div>
+          <p class="msg" aria-live="polite"></p>
+        </div>
+        <div class="field" data-name="nick">
+          <div class="lb-row">
+            <label class="lb" for="nick">닉네임 <span class="req">*</span></label>
+            <button type="button" class="btn-text" id="nickAuto">자동으로 정하기</button>
+          </div>
+          <div class="row">
+            <div class="input"><input id="nick" type="text" maxlength="15" placeholder="2~15자"></div>
+            <button type="button" class="btn-sub" id="nickCheck">중복확인</button>
+          </div>
+          <p class="msg" aria-live="polite"></p>
+        </div>
+        <button class="cta" type="submit">가입하기</button>
+      </form>
+    </section>
+
+    <!-- 3단계: 완료 -->
+    <section id="s3" hidden>
+      <div class="done-box">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h1><span id="who">회원</span>님, 가입이 끝났어요</h1>
+        <p class="lead">모아집에서 마음에 드는 공간을 찾아보세요.</p>
+        <div class="coupon">신규 가입 쿠폰이 도착했어요<b>10,000원</b></div>
+        <button class="cta" type="button" onclick="location.reload()">쇼핑 시작하기</button>
+      </div>
+    </section>
   </div>
 </main>
 
 <script src="js/common.js"></script>
 <script src="js/login.js"></script>
+<script src="js/actions.js"></script>
 </body>
 </html>
