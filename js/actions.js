@@ -1,19 +1,17 @@
-/* 동작(액션): 단계 이동, 약관 선택, 입력 검증, 비밀번호 보기 */
-const $ = s => document.querySelector(s);
-const f = n => $(`.field[data-name="${n}"]`);
-const val = id => $('#' + id).value;
-const EYE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>';
-const EYE_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>';
-document.querySelectorAll('.eye').forEach(b => b.innerHTML = EYE);
+/* 동작(액션): 단계 이동, 약관 선택, 입력 검증 (공통 도우미는 common.js) */
 
 /* 단계 이동 */
+let step = 0; // 0 시작 · 1 약관 · 2 정보 입력 · 3 완료
 function go(n) {
-  [1, 2, 3].forEach(i => $('#s' + i).hidden = i !== n);
+  step = n;
+  [0, 1, 2, 3].forEach(i => $('#s' + i).hidden = i !== n);
+  $('#steps').hidden = n === 0;                       // 시작 화면에서는 단계 표시줄 숨김
   [...$('#steps').children].forEach((li, i) => { li.className = i + 1 < n ? 'done' : i + 1 === n ? 'on' : ''; });
-  $('#back').hidden = n !== 2;
+  $('#back').hidden = !(n === 1 || n === 2);          // 약관·정보 입력에서만 이전 버튼
   window.scrollTo(0, 0);
 }
-$('#back').addEventListener('click', () => go(1));
+$('#back').addEventListener('click', () => go(step - 1));
+$('#startEmail').addEventListener('click', () => go(1));
 
 /* 1단계: 약관 (항목끼리 서로 영향 없음) */
 const terms = [...document.querySelectorAll('.term')];
@@ -62,13 +60,6 @@ for (const n of ['email', 'pw', 'pw2', 'nick']) {
   });
   input.addEventListener('blur', () => show(n));
 }
-document.querySelectorAll('.eye').forEach(b => b.addEventListener('click', () => {
-  const i = $('#' + b.dataset.target), reveal = i.type === 'password';
-  i.type = reveal ? 'text' : 'password';
-  b.innerHTML = reveal ? EYE_OFF : EYE;
-  b.setAttribute('aria-pressed', reveal);
-  b.setAttribute('aria-label', reveal ? '비밀번호 숨기기' : '비밀번호 보기');
-}));
 $('#nickCheck').addEventListener('click', () => {
   touched.nick = true;
   const v = val('nick').trim(), el = f('nick'), msg = el.querySelector('.msg');

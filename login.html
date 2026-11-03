@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>모아집 로그인</title>
+<!-- 디자인 시스템 토큰 -->
+<link rel="stylesheet" href="css/tokens/colors.css">
+<link rel="stylesheet" href="css/tokens/typography.css">
+<link rel="stylesheet" href="css/tokens/spacing.css">
+<link rel="stylesheet" href="css/tokens/radius.css">
+<link rel="stylesheet" href="css/tokens/effects.css">
+<link rel="stylesheet" href="css/tokens/sizes.css">
+<!-- 컴포넌트 스타일 -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="top">
+    <span class="top-spacer"></span>
+    <span class="logo">모아집</span>
+    <span class="top-spacer"></span>
+  </div>
+
+  <div class="card">
+    <!-- 로그인 -->
+    <section id="login">
+      <h1>다시 만나서 반가워요</h1>
+      <p class="lead">이메일과 비밀번호로 로그인해 주세요.</p>
+      <p class="req-note"><b>*</b> 표시는 필수 입력 항목이에요</p>
+      <form id="form" novalidate>
+        <div class="field" data-name="email">
+          <label class="lb" for="email">이메일 <span class="req">*</span></label>
+          <div class="input"><input id="email" type="email" autocomplete="email" placeholder="example@moajip.com"></div>
+          <p class="msg" aria-live="polite"></p>
+        </div>
+        <div class="field" data-name="pw">
+          <label class="lb" for="pw">비밀번호 <span class="req">*</span></label>
+          <div class="input">
+            <input id="pw" type="password" autocomplete="current-password" placeholder="비밀번호를 입력해 주세요">
+            <button type="button" class="eye" data-target="pw" aria-label="비밀번호 보기" aria-pressed="false"></button>
+          </div>
+          <p class="msg" aria-live="polite"></p>
+        </div>
+        <div class="opts">
+          <label><input type="checkbox" id="keep"> 로그인 상태 유지</label>
+          <a class="link" href="#">비밀번호 찾기</a>
+        </div>
+        <p class="alert" id="alert" role="alert"></p>
+        <button class="cta" type="submit">로그인</button>
+      </form>
+
+      <div class="divider">또는 간편 로그인</div>
+      <div class="social">
+        <button class="kakao" aria-label="카카오로 로그인">K</button>
+        <button class="naver" aria-label="네이버로 로그인">N</button>
+        <button class="apple" aria-label="애플로 로그인">A</button>
+        <button class="google" aria-label="구글로 로그인">G</button>
+      </div>
+      <p class="login">아직 회원이 아닌가요? <a href="index.html">회원가입</a></p>
+    </section>
+
+    <!-- 로그인 완료 -->
+    <section id="ok" hidden>
+      <div class="done-box">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h1>로그인됐어요</h1>
+        <p class="lead">모아집에서 마음에 드는 공간을 찾아보세요.</p>
+        <button class="cta" type="button" onclick="location.reload()">쇼핑 시작하기</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="js/common.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>
