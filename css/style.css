@@ -28,9 +28,9 @@ section[hidden]{display:none}
 .all-row .t.all{border-bottom:0;padding:var(--space-12) 0 var(--space-6)}
 .all-row .t.all + .t.all{padding:var(--space-6) 0 var(--space-12)}
 .terms-reset{display:block;margin:var(--space-10) 0 var(--space-2) auto;padding:var(--space-2) 0;border:0;background:none;font-size:var(--font-size-13);font-weight:var(--font-weight-bold);color:var(--color-text-primary);text-decoration:underline;cursor:pointer}
-.tag{margin-left:auto;font-size:var(--font-size-12);color:var(--color-text-secondary)}
+.tag{margin-left:calc(var(--space-6) - var(--space-10));font-size:var(--font-size-12);color:var(--color-text-tertiary)}
 .tag.must{color:var(--color-text-brand);font-weight:var(--font-weight-bold)}
-.view{font-size:var(--font-size-12);color:var(--color-text-secondary);text-decoration:underline;margin-left:var(--space-6)}
+.view{font-size:var(--font-size-12);color:var(--color-text-tertiary);text-decoration:underline;margin-left:auto}
 .req-note{font-size:var(--font-size-12);color:var(--color-text-secondary);text-align:right;margin:calc(var(--space-8) * -1) 0 var(--space-10)}
 .req,.req-note b{color:var(--color-text-error)}
 .field{margin-bottom:var(--space-16)}
