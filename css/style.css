@@ -1,0 +1,61 @@
+/* 레이아웃·컴포넌트 스타일 (색상은 colors.css의 변수 사용) */
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--text);background:var(--bg)}
+  .wrap{max-width:440px;margin:0 auto;padding:28px 20px 56px;min-height:100vh}
+  .top{display:flex;align-items:center;justify-content:space-between;height:36px}
+  .logo{font-size:22px;font-weight:800;color:var(--brand);letter-spacing:-.5px}
+  .back{border:0;background:none;font-size:14px;color:var(--sub);cursor:pointer;padding:6px 0;width:44px;text-align:left}
+  .back[hidden]{visibility:hidden;display:block}
+  .steps{display:flex;gap:6px;margin:22px 0 6px;list-style:none;padding:0}
+  .steps li{flex:1;font-size:12px;color:var(--sub)}
+  .steps li::before{content:"";display:block;height:4px;border-radius:2px;background:var(--line);margin-bottom:6px}
+  .steps li.on{color:var(--brand);font-weight:700}
+  .steps li.on::before,.steps li.done::before{background:var(--brand)}
+  .steps li.done{color:var(--text)}
+  .card{background:var(--card);border-radius:16px;padding:28px 22px;margin-top:14px;box-shadow:0 2px 14px var(--shadow)}
+  h1{font-size:22px;line-height:1.35;margin:0 0 6px}
+  .lead{margin:0 0 22px;color:var(--sub);font-size:14px;line-height:1.5}
+  section[hidden]{display:none}
+  .quick{display:flex;gap:8px;margin-bottom:12px}
+  .chip{flex:1;height:42px;border-radius:8px;border:1px solid var(--line);background:var(--white);font-size:14px;font-weight:600;color:var(--text);cursor:pointer}
+  .chip.primary{background:var(--brand-bg);border-color:var(--brand);color:var(--brand)}
+  .chip:hover{border-color:var(--brand)}
+  .terms{border:1px solid var(--line);border-radius:10px;padding:2px 14px}
+  .t{display:flex;align-items:center;gap:10px;padding:12px 0;font-size:14px;cursor:pointer}
+  .t input{width:20px;height:20px;accent-color:var(--brand);flex:none}
+  .t.all{font-weight:700;border-bottom:1px solid var(--line);padding:14px 0;font-size:15px}
+  .tag{margin-left:auto;font-size:12px;color:var(--sub)}
+  .tag.must{color:var(--brand);font-weight:700}
+  .view{font-size:12px;color:var(--sub);text-decoration:underline;margin-left:6px}
+  .req-note{font-size:12px;color:var(--sub);text-align:right;margin:-8px 0 10px}
+  .req,.req-note b{color:var(--err)}
+  .field{margin-bottom:16px}
+  label.lb{display:block;font-size:14px;font-weight:700;margin-bottom:6px}
+  .row{display:flex;gap:8px}
+  .input{position:relative;flex:1}
+  input[type=text],input[type=email],input[type=password]{width:100%;height:48px;padding:0 46px 0 14px;border:1px solid var(--line);border-radius:8px;font-size:15px;outline:none;background:var(--white);color:var(--text)}
+  input:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--focus-ring)}
+  .field.invalid input{border-color:var(--err)}
+  .field.valid input{border-color:var(--ok)}
+  .eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;background:none;cursor:pointer;color:var(--sub);display:grid;place-items:center}
+  .eye svg{width:20px;height:20px}
+  .msg{min-height:18px;margin:6px 2px 0;font-size:12px;color:var(--sub)}
+  .field.invalid .msg{color:var(--err)}
+  .field.valid .msg{color:var(--ok)}
+  .btn-sub{height:48px;padding:0 14px;border:1px solid var(--brand);color:var(--brand);background:var(--white);border-radius:8px;font-weight:700;cursor:pointer;white-space:nowrap}
+  .cta{width:100%;height:54px;margin-top:8px;border:0;border-radius:10px;background:var(--brand);color:var(--white);font-size:16px;font-weight:700;cursor:pointer}
+  .cta:hover:not(:disabled){background:var(--brand-d)}
+  .cta:disabled{background:var(--disabled);cursor:not-allowed}
+  .hint{font-size:12px;color:var(--sub);text-align:center;margin:8px 0 0;min-height:18px}
+  .divider{display:flex;align-items:center;gap:10px;color:var(--sub);font-size:13px;margin:26px 0 14px}
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+  .social{display:flex;justify-content:center;gap:12px}
+  .social button{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);cursor:pointer;font-weight:800;font-size:15px}
+  .kakao{background:var(--kakao)}.naver{background:var(--naver);color:var(--white)}.apple{background:var(--apple);color:var(--white)}.google{background:var(--white);color:var(--google-text)}
+  .login{text-align:center;font-size:13px;color:var(--sub);margin-top:22px}
+  .login a{color:var(--brand);font-weight:700}
+  .done-box{text-align:center;padding:12px 0}
+  .badge{width:64px;height:64px;border-radius:50%;background:var(--brand-bg);color:var(--brand);display:grid;place-items:center;margin:0 auto 16px}
+  .badge svg{width:30px;height:30px}
+  .coupon{margin:18px 0;border:1px dashed var(--brand);border-radius:10px;padding:14px;background:var(--brand-bg);font-size:14px}
+  .coupon b{color:var(--brand);font-size:18px;display:block;margin-top:2px}

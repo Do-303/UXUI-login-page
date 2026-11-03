@@ -1,0 +1,22 @@
+/* 색상 토큰: 색을 바꾸려면 이 파일만 수정하세요 */
+:root{
+  --brand:#B5532F;
+  --brand-d:#984323;
+  --brand-bg:#FBEFE8;
+  --text:#2B2623;
+  --sub:#7A716B;
+  --line:#E4DCD3;
+  --err:#D92D20;
+  --ok:#2E7D4F;
+  --bg:#FAF6F0;
+  --card:#fff;
+  --white:#fff;
+  --disabled:#D9CFC6;
+  --focus-ring:rgba(181,83,47,.15);
+  --shadow:rgba(60,40,20,.06);
+  /* 간편 가입 브랜드 색 */
+  --kakao:#fee500;
+  --naver:#03c75a;
+  --apple:#000;
+  --google-text:#444;
+}
