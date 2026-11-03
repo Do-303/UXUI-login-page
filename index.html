@@ -48,18 +48,18 @@
     <section id="s1" hidden>
       <h1>모아집에 오신 걸 환영해요</h1>
       <p class="lead">가입을 위해 약관을 확인해 주세요.</p>
-      <div class="quick">
-        <button type="button" class="chip primary" id="reqOnly">필수 항목만 동의하기</button>
-        <button type="button" class="chip" id="reset">선택 해제</button>
-      </div>
       <div class="terms">
-        <label class="t all"><input type="checkbox" id="all"> 전체 동의</label>
+        <div class="all-row">
+          <label class="t all"><input type="checkbox" id="all"> 전체 동의</label>
+          <button type="button" class="chip primary chip-sm" id="reqOnly">필수 항목만 동의하기</button>
+        </div>
         <label class="t"><input type="checkbox" class="term" data-req="1"> 만 14세 이상이에요 <span class="tag must">필수</span></label>
         <label class="t"><input type="checkbox" class="term" data-req="1"> 이용약관 <a class="view" href="#">보기</a> <span class="tag must">필수</span></label>
         <label class="t"><input type="checkbox" class="term" data-req="1"> 개인정보 수집·이용 <a class="view" href="#">보기</a> <span class="tag must">필수</span></label>
         <label class="t"><input type="checkbox" class="term"> 마케팅 활용 동의 <span class="tag">선택</span></label>
         <label class="t"><input type="checkbox" class="term"> 이벤트·쿠폰·특가 알림 <span class="tag">선택</span></label>
       </div>
+      <button type="button" class="terms-reset" id="reset">선택 해제</button>
       <button class="cta" id="next1" type="button" disabled>다음</button>
       <p class="hint" id="hint1">필수 약관에 동의하면 다음으로 넘어갈 수 있어요.</p>
     </section>
