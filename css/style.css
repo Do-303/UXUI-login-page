@@ -74,12 +74,38 @@ input:focus{border-color:var(--color-border-brand);box-shadow:var(--focus-ring)}
 .login{text-align:center;font-size:var(--font-size-13);color:var(--color-text-secondary);margin:var(--space-24) 0 0}
 .login a{color:var(--color-text-brand);font-weight:var(--font-weight-bold);text-decoration:none}
 .done-box{text-align:center}
-#s3 h1{margin-bottom:var(--space-16)}
-#s3 .cta{margin-top:0}
+.done-box h1{margin-bottom:var(--space-16)}
+.done-box .cta{margin-top:0}
 #s2 .cta{margin-top:var(--space-5)}
 .badge{width:var(--size-badge);height:var(--size-badge);border-radius:var(--radius-full);background:var(--color-bg-brand-subtle);color:var(--color-text-brand);display:grid;place-items:center;margin:0 auto var(--space-16)}
 .badge svg{width:var(--size-badge-icon);height:var(--size-badge-icon)}
 .coupon{margin:0 0 var(--space-16);border:var(--size-hairline) dashed var(--color-border-brand);border-radius:var(--radius-md);padding:var(--space-14);background:var(--color-bg-brand-subtle);font-size:var(--font-size-14)}
+/* 재가입 완료 */
+.hero{display:block;width:100%;max-width:var(--size-hero-width);height:auto;margin:0 auto var(--space-16)}
+.hero-bg{fill:var(--color-bg-brand-subtle)}
+.hero-dot{fill:var(--color-bg-brand)}
+.hero-line{fill:none;stroke:var(--color-bg-brand);stroke-width:2.72727;stroke-linecap:round;stroke-linejoin:round}
+.restore{margin:0 0 var(--space-16);padding:var(--space-14);border-radius:var(--radius-md);background:var(--color-bg-subtle);text-align:left;font-size:var(--font-size-14)}
+.restore-row{display:flex;justify-content:space-between;align-items:center}
+.restore-row + .restore-row{margin-top:var(--space-4)}
+.restore-row span{display:inline-flex;align-items:center;gap:var(--space-6)}
+.restore-row svg,.notice svg{width:var(--size-icon-sm);height:var(--size-icon-sm);color:var(--color-text-tertiary);flex:none}
+.restore-row b{font-weight:var(--font-weight-bold)}
+.restore-note{margin:var(--space-4) 0 0;font-size:var(--font-size-12);color:var(--color-text-tertiary)}
+.done-actions{display:flex;flex-direction:column;gap:var(--space-8)}
+.cta.line{background:var(--color-bg-surface);border:var(--size-hairline) solid var(--color-border-default);color:var(--color-text-primary);font-size:var(--font-size-15);font-weight:var(--font-weight-regular)}
+.cta.line:hover{background:var(--color-bg-subtle)}
+.done-warn{margin:0;font-size:var(--font-size-12);color:var(--color-text-tertiary)}
+.notice{display:flex;gap:var(--space-6);margin:0 0 var(--space-16);padding:var(--space-14);border-radius:var(--radius-md);background:var(--color-bg-subtle);text-align:left;font-size:var(--font-size-13);color:var(--color-text-secondary)}
+/* 이메일 인증 · 돌아온 고객 확인 */
+.btn-sub.done{border-color:var(--color-border-success);color:var(--color-text-success);cursor:default}
+.returning{margin-bottom:var(--space-20);padding:var(--space-16);border:var(--size-hairline) solid var(--color-border-brand);border-radius:var(--radius-md);background:var(--color-bg-brand-subtle)}
+.returning-title{margin:0;font-size:var(--font-size-14);font-weight:var(--font-weight-bold)}
+.returning-body{margin:var(--space-4) 0 0;font-size:var(--font-size-13);color:var(--color-text-secondary)}
+.returning-actions{display:flex;gap:var(--space-8);margin-top:var(--space-12)}
+.returning-actions button{flex:1;height:var(--size-button-sm);border-radius:var(--radius-sm);font-size:var(--font-size-14);font-weight:var(--font-weight-bold);cursor:pointer}
+.btn-line{background:var(--color-bg-surface);border:var(--size-hairline) solid var(--color-border-default);color:var(--color-text-primary)}
+.btn-fill{background:var(--color-bg-brand);border:0;color:var(--color-text-inverse)}
 .coupon b{color:var(--color-text-brand);font-size:var(--font-size-18);display:block;margin-top:var(--space-2)}
 .steps[hidden]{display:none}
 .link{color:var(--color-text-secondary);text-decoration:underline;font-size:var(--font-size-13)}

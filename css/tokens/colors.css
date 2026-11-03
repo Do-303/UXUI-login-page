@@ -20,6 +20,7 @@
   --palette-black:#000000;
   --palette-kakao:#FEE500;
   --palette-naver:#03C75A;
+  --palette-gray-100:#F5F5F5;
   --palette-warm-400:#888888;
 
   /* 2-1) 글자색 */
@@ -35,6 +36,7 @@
   /* 2-2) 배경색 */
   --color-bg-page:var(--palette-warm-50);
   --color-bg-surface:var(--palette-white);
+  --color-bg-subtle:var(--palette-gray-100);
   --color-bg-brand-subtle:var(--palette-terracotta-50);
   --color-bg-brand:var(--palette-terracotta-500);
   --color-bg-brand-hover:var(--palette-terracotta-600);
