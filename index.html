@@ -5,139 +5,210 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>모아집 회원가입</title>
 <style>
-  :root{--brand:#2f80ed;--text:#222;--sub:#757575;--line:#dcdcdc;--err:#e5484d;--ok:#1a9d5c;--bg:#fff}
+  :root{--brand:#B5532F;--brand-d:#984323;--brand-bg:#FBEFE8;--text:#2B2623;--sub:#7A716B;--line:#E4DCD3;--err:#D92D20;--ok:#2E7D4F;--bg:#FAF6F0;--card:#fff}
   *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--text);background:#f7f8fa}
-  .wrap{max-width:400px;margin:0 auto;padding:40px 16px 60px;background:var(--bg);min-height:100vh}
-  h1{font-size:28px;color:var(--brand);text-align:center;margin:0 0 6px}
-  .lead{text-align:center;color:var(--sub);margin:0 0 28px;font-size:14px}
-  .req-note{font-size:12px;color:var(--sub);text-align:right;margin:0 0 8px}
-  .req-note b,.req{color:var(--err)}
-  .field{margin-bottom:18px}
-  label.lb{display:block;font-size:14px;font-weight:600;margin-bottom:6px}
+  body{margin:0;font-family:-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--text);background:var(--bg)}
+  .wrap{max-width:440px;margin:0 auto;padding:28px 20px 56px;min-height:100vh}
+  .top{display:flex;align-items:center;justify-content:space-between;height:36px}
+  .logo{font-size:22px;font-weight:800;color:var(--brand);letter-spacing:-.5px}
+  .back{border:0;background:none;font-size:14px;color:var(--sub);cursor:pointer;padding:6px 0;width:44px;text-align:left}
+  .back[hidden]{visibility:hidden;display:block}
+  .steps{display:flex;gap:6px;margin:22px 0 6px;list-style:none;padding:0}
+  .steps li{flex:1;font-size:12px;color:var(--sub)}
+  .steps li::before{content:"";display:block;height:4px;border-radius:2px;background:var(--line);margin-bottom:6px}
+  .steps li.on{color:var(--brand);font-weight:700}
+  .steps li.on::before,.steps li.done::before{background:var(--brand)}
+  .steps li.done{color:var(--text)}
+  .card{background:var(--card);border-radius:16px;padding:28px 22px;margin-top:14px;box-shadow:0 2px 14px rgba(60,40,20,.06)}
+  h1{font-size:22px;line-height:1.35;margin:0 0 6px}
+  .lead{margin:0 0 22px;color:var(--sub);font-size:14px;line-height:1.5}
+  section[hidden]{display:none}
+  .quick{display:flex;gap:8px;margin-bottom:12px}
+  .chip{flex:1;height:42px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:14px;font-weight:600;color:var(--text);cursor:pointer}
+  .chip.primary{background:var(--brand-bg);border-color:var(--brand);color:var(--brand)}
+  .chip:hover{border-color:var(--brand)}
+  .terms{border:1px solid var(--line);border-radius:10px;padding:2px 14px}
+  .t{display:flex;align-items:center;gap:10px;padding:12px 0;font-size:14px;cursor:pointer}
+  .t input{width:20px;height:20px;accent-color:var(--brand);flex:none}
+  .t.all{font-weight:700;border-bottom:1px solid var(--line);padding:14px 0;font-size:15px}
+  .tag{margin-left:auto;font-size:12px;color:var(--sub)}
+  .tag.must{color:var(--brand);font-weight:700}
+  .view{font-size:12px;color:var(--sub);text-decoration:underline;margin-left:6px}
+  .req-note{font-size:12px;color:var(--sub);text-align:right;margin:-8px 0 10px}
+  .req,.req-note b{color:var(--err)}
+  .field{margin-bottom:16px}
+  label.lb{display:block;font-size:14px;font-weight:700;margin-bottom:6px}
   .row{display:flex;gap:8px}
   .input{position:relative;flex:1}
-  input[type=text],input[type=email],input[type=password]{width:100%;height:46px;padding:0 44px 0 12px;border:1px solid var(--line);border-radius:6px;font-size:15px;outline:none}
-  input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(47,128,237,.15)}
+  input[type=text],input[type=email],input[type=password]{width:100%;height:48px;padding:0 46px 0 14px;border:1px solid var(--line);border-radius:8px;font-size:15px;outline:none;background:#fff;color:var(--text)}
+  input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(181,83,47,.15)}
   .field.invalid input{border-color:var(--err)}
   .field.valid input{border-color:var(--ok)}
-  .eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;background:none;cursor:pointer;color:var(--sub);font-size:18px}
+  .eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;background:none;cursor:pointer;color:var(--sub);display:grid;place-items:center}
+  .eye svg{width:20px;height:20px}
   .msg{min-height:18px;margin:6px 2px 0;font-size:12px;color:var(--sub)}
   .field.invalid .msg{color:var(--err)}
   .field.valid .msg{color:var(--ok)}
-  .btn-sub{height:46px;padding:0 14px;border:1px solid var(--brand);color:var(--brand);background:#fff;border-radius:6px;font-weight:600;cursor:pointer;white-space:nowrap}
-  fieldset{border:0;padding:0;margin:26px 0 0}
-  legend{font-size:14px;font-weight:600;padding:0;margin-bottom:8px}
-  .terms{border:1px solid var(--line);border-radius:6px;padding:4px 14px}
-  .t{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:14px}
-  .t input{width:18px;height:18px;accent-color:var(--brand)}
-  .t.all{font-weight:700;border-bottom:1px solid var(--line);padding:14px 0}
-  .t .tag{color:var(--sub);font-size:12px;margin-left:auto}
-  .t .tag.must{color:var(--brand)}
-  .terms-err{font-size:12px;color:var(--err);min-height:18px;margin:6px 2px 0}
-  .submit{width:100%;height:52px;margin-top:14px;border:0;border-radius:6px;background:var(--brand);color:#fff;font-size:16px;font-weight:700;cursor:pointer}
-  .divider{display:flex;align-items:center;gap:10px;color:var(--sub);font-size:13px;margin:32px 0 16px}
+  .btn-sub{height:48px;padding:0 14px;border:1px solid var(--brand);color:var(--brand);background:#fff;border-radius:8px;font-weight:700;cursor:pointer;white-space:nowrap}
+  .cta{width:100%;height:54px;margin-top:8px;border:0;border-radius:10px;background:var(--brand);color:#fff;font-size:16px;font-weight:700;cursor:pointer}
+  .cta:hover:not(:disabled){background:var(--brand-d)}
+  .cta:disabled{background:#D9CFC6;cursor:not-allowed}
+  .hint{font-size:12px;color:var(--sub);text-align:center;margin:8px 0 0;min-height:18px}
+  .divider{display:flex;align-items:center;gap:10px;color:var(--sub);font-size:13px;margin:26px 0 14px}
   .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
-  .social{display:flex;justify-content:center;gap:14px}
-  .social button{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);cursor:pointer;font-weight:700;font-size:15px}
+  .social{display:flex;justify-content:center;gap:12px}
+  .social button{width:52px;height:52px;border-radius:50%;border:1px solid var(--line);cursor:pointer;font-weight:800;font-size:15px}
   .kakao{background:#fee500}.naver{background:#03c75a;color:#fff}.apple{background:#000;color:#fff}.google{background:#fff;color:#444}
-  .login{text-align:center;font-size:13px;color:var(--sub);margin-top:24px}
-  .login a{color:var(--brand);font-weight:600}
+  .login{text-align:center;font-size:13px;color:var(--sub);margin-top:22px}
+  .login a{color:var(--brand);font-weight:700}
+  .done-box{text-align:center;padding:12px 0}
+  .badge{width:64px;height:64px;border-radius:50%;background:var(--brand-bg);color:var(--brand);display:grid;place-items:center;margin:0 auto 16px}
+  .badge svg{width:30px;height:30px}
+  .coupon{margin:18px 0;border:1px dashed var(--brand);border-radius:10px;padding:14px;background:var(--brand-bg);font-size:14px}
+  .coupon b{color:var(--brand);font-size:18px;display:block;margin-top:2px}
 </style>
 </head>
 <body>
 <main class="wrap">
-  <h1>모아집</h1>
-  <p class="lead">이메일로 간단하게 가입해 보세요</p>
+  <div class="top">
+    <button class="back" id="back" type="button" hidden>← 이전</button>
+    <span class="logo">모아집</span>
+    <span style="width:44px"></span>
+  </div>
 
-  <form id="form" novalidate>
-    <p class="req-note"><b>*</b> 표시는 필수 입력 항목이에요</p>
+  <ol class="steps" id="steps" aria-label="가입 단계">
+    <li class="on">약관 동의</li><li>정보 입력</li><li>가입 완료</li>
+  </ol>
 
-    <div class="field" data-name="email">
-      <label class="lb" for="email">이메일 <span class="req">*</span></label>
-      <div class="input"><input id="email" type="email" autocomplete="email" placeholder="example@moajip.com"></div>
-      <p class="msg" aria-live="polite"></p>
-    </div>
-
-    <div class="field" data-name="pw">
-      <label class="lb" for="pw">비밀번호 <span class="req">*</span></label>
-      <div class="input">
-        <input id="pw" type="password" autocomplete="new-password" placeholder="8자 이상, 영문+숫자 포함">
-        <button type="button" class="eye" data-target="pw" aria-label="비밀번호 보기" aria-pressed="false">👁</button>
+  <div class="card">
+    <!-- 1단계: 약관 동의 -->
+    <section id="s1">
+      <h1>모아집에 오신 걸 환영해요</h1>
+      <p class="lead">가입을 위해 약관을 확인해 주세요.</p>
+      <div class="quick">
+        <button type="button" class="chip primary" id="reqOnly">필수 항목만 동의하기</button>
+        <button type="button" class="chip" id="reset">선택 해제</button>
       </div>
-      <p class="msg" aria-live="polite">8자 이상, 영문과 숫자를 함께 사용해 주세요.</p>
-    </div>
-
-    <div class="field" data-name="pw2">
-      <label class="lb" for="pw2">비밀번호 확인 <span class="req">*</span></label>
-      <div class="input">
-        <input id="pw2" type="password" autocomplete="new-password" placeholder="비밀번호를 한 번 더 입력">
-        <button type="button" class="eye" data-target="pw2" aria-label="비밀번호 확인 보기" aria-pressed="false">👁</button>
-      </div>
-      <p class="msg" aria-live="polite"></p>
-    </div>
-
-    <div class="field" data-name="nick">
-      <label class="lb" for="nick">닉네임 <span class="req">*</span></label>
-      <div class="row">
-        <div class="input"><input id="nick" type="text" maxlength="15" placeholder="2~15자"></div>
-        <button type="button" class="btn-sub" id="nickCheck">중복확인</button>
-      </div>
-      <p class="msg" aria-live="polite"></p>
-    </div>
-
-    <fieldset>
-      <legend>약관 동의</legend>
       <div class="terms">
         <label class="t all"><input type="checkbox" id="all"> 전체 동의</label>
         <label class="t"><input type="checkbox" class="term" data-req="1"> 만 14세 이상이에요 <span class="tag must">필수</span></label>
-        <label class="t"><input type="checkbox" class="term" data-req="1"> 이용약관 <span class="tag must">필수</span></label>
-        <label class="t"><input type="checkbox" class="term" data-req="1"> 개인정보 수집·이용 <span class="tag must">필수</span></label>
+        <label class="t"><input type="checkbox" class="term" data-req="1"> 이용약관 <a class="view" href="#">보기</a> <span class="tag must">필수</span></label>
+        <label class="t"><input type="checkbox" class="term" data-req="1"> 개인정보 수집·이용 <a class="view" href="#">보기</a> <span class="tag must">필수</span></label>
         <label class="t"><input type="checkbox" class="term"> 마케팅 활용 동의 <span class="tag">선택</span></label>
         <label class="t"><input type="checkbox" class="term"> 이벤트·쿠폰·특가 알림 <span class="tag">선택</span></label>
       </div>
-      <p class="terms-err" id="termsErr" aria-live="polite"></p>
-    </fieldset>
+      <button class="cta" id="next1" type="button" disabled>다음</button>
+      <p class="hint" id="hint1">필수 약관에 동의하면 다음으로 넘어갈 수 있어요.</p>
 
-    <button class="submit" type="submit">회원가입 완료</button>
-  </form>
+      <div class="divider">또는 간편 가입</div>
+      <div class="social">
+        <button class="kakao" aria-label="카카오로 가입">K</button>
+        <button class="naver" aria-label="네이버로 가입">N</button>
+        <button class="apple" aria-label="애플로 가입">A</button>
+        <button class="google" aria-label="구글로 가입">G</button>
+      </div>
+      <p class="login">이미 계정이 있나요? <a href="#">로그인</a></p>
+    </section>
 
-  <!-- 간편 가입은 이메일 가입 아래로 이동, 사용량 적은 페이스북 등은 제거 -->
-  <div class="divider">또는 간편 가입</div>
-  <div class="social">
-    <button class="kakao" aria-label="카카오로 가입">K</button>
-    <button class="naver" aria-label="네이버로 가입">N</button>
-    <button class="apple" aria-label="애플로 가입"></button>
-    <button class="google" aria-label="구글로 가입">G</button>
+    <!-- 2단계: 정보 입력 -->
+    <section id="s2" hidden>
+      <h1>계정 정보를 입력해 주세요</h1>
+      <p class="lead">이메일과 비밀번호만 있으면 돼요.</p>
+      <p class="req-note"><b>*</b> 표시는 필수 입력 항목이에요</p>
+      <form id="form" novalidate>
+        <div class="field" data-name="email">
+          <label class="lb" for="email">이메일 <span class="req">*</span></label>
+          <div class="input"><input id="email" type="email" autocomplete="email" placeholder="example@moajip.com"></div>
+          <p class="msg" aria-live="polite"></p>
+        </div>
+        <div class="field" data-name="pw">
+          <label class="lb" for="pw">비밀번호 <span class="req">*</span></label>
+          <div class="input">
+            <input id="pw" type="password" autocomplete="new-password" placeholder="8자 이상, 영문+숫자 포함">
+            <button type="button" class="eye" data-target="pw" aria-label="비밀번호 보기" aria-pressed="false"></button>
+          </div>
+          <p class="msg" aria-live="polite">8자 이상, 영문과 숫자를 함께 사용해 주세요.</p>
+        </div>
+        <div class="field" data-name="pw2">
+          <label class="lb" for="pw2">비밀번호 확인 <span class="req">*</span></label>
+          <div class="input">
+            <input id="pw2" type="password" autocomplete="new-password" placeholder="비밀번호를 한 번 더 입력">
+            <button type="button" class="eye" data-target="pw2" aria-label="비밀번호 확인 보기" aria-pressed="false"></button>
+          </div>
+          <p class="msg" aria-live="polite"></p>
+        </div>
+        <div class="field" data-name="nick">
+          <label class="lb" for="nick">닉네임 <span class="req">*</span></label>
+          <div class="row">
+            <div class="input"><input id="nick" type="text" maxlength="15" placeholder="2~15자"></div>
+            <button type="button" class="btn-sub" id="nickCheck">중복확인</button>
+          </div>
+          <p class="msg" aria-live="polite"></p>
+        </div>
+        <button class="cta" type="submit">가입하기</button>
+      </form>
+    </section>
+
+    <!-- 3단계: 완료 -->
+    <section id="s3" hidden>
+      <div class="done-box">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h1><span id="who">회원</span>님, 가입이 끝났어요</h1>
+        <p class="lead">모아집에서 마음에 드는 공간을 찾아보세요.</p>
+        <div class="coupon">신규 가입 쿠폰이 도착했어요<b>10,000원</b></div>
+        <button class="cta" type="button" onclick="location.reload()">쇼핑 시작하기</button>
+      </div>
+    </section>
   </div>
-
-  <p class="login">이미 계정이 있나요? <a href="#">로그인</a></p>
 </main>
 
 <script>
 const $ = s => document.querySelector(s);
 const f = n => $(`.field[data-name="${n}"]`);
 const val = id => $('#' + id).value;
-let nickOk = false;
-const touched = {}; // 사용자가 입력을 시작한 필드만 true
+const EYE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+const EYE_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>';
+document.querySelectorAll('.eye').forEach(b => b.innerHTML = EYE);
 
+/* 단계 이동 */
+function go(n) {
+  [1, 2, 3].forEach(i => $('#s' + i).hidden = i !== n);
+  [...$('#steps').children].forEach((li, i) => { li.className = i + 1 < n ? 'done' : i + 1 === n ? 'on' : ''; });
+  $('#back').hidden = n !== 2;
+  window.scrollTo(0, 0);
+}
+$('#back').addEventListener('click', () => go(1));
+
+/* 1단계: 약관 (항목끼리 서로 영향 없음) */
+const terms = [...document.querySelectorAll('.term')];
+const reqTerms = terms.filter(t => t.dataset.req);
+function syncTerms() {
+  $('#all').checked = terms.every(t => t.checked);
+  const ok = reqTerms.every(t => t.checked);
+  $('#next1').disabled = !ok;
+  $('#hint1').textContent = ok ? '' : '필수 약관에 동의하면 다음으로 넘어갈 수 있어요.';
+}
+$('#all').addEventListener('change', e => { terms.forEach(t => t.checked = e.target.checked); syncTerms(); });
+terms.forEach(t => t.addEventListener('change', syncTerms));
+$('#reqOnly').addEventListener('click', () => { terms.forEach(t => t.checked = !!t.dataset.req); syncTerms(); });
+$('#reset').addEventListener('click', () => { terms.forEach(t => t.checked = false); syncTerms(); });
+document.querySelectorAll('.view').forEach(a => a.addEventListener('click', e => e.preventDefault()));
+$('#next1').addEventListener('click', () => go(2));
+
+/* 2단계: 입력 검증 */
+let nickOk = false;
+const touched = {};
 const rules = {
   email: () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('email')) ? '' : '올바른 이메일 형식이 아니에요.',
   pw: () => /^(?=.*[A-Za-z])(?=.*\d).{8,}$/.test(val('pw')) ? '' : '8자 이상, 영문과 숫자를 함께 사용해 주세요.',
   pw2: () => val('pw2') === val('pw') ? '' : '비밀번호가 일치하지 않아요.',
-  nick: () => {
-    const v = val('nick').trim();
-    if (v.length < 2) return '닉네임은 2자 이상이에요.';
-    return nickOk ? '' : '닉네임 중복확인을 해 주세요.';
-  }
+  nick: () => val('nick').trim().length < 2 ? '닉네임은 2자 이상이에요.' : nickOk ? '' : '닉네임 중복확인을 해 주세요.'
 };
 const okText = { email: '', pw: '사용 가능한 비밀번호예요.', pw2: '비밀번호가 일치해요.', nick: '사용 가능한 닉네임이에요.' };
 const hint = { pw: '8자 이상, 영문과 숫자를 함께 사용해 주세요.' };
 
 function show(name, force) {
-  const el = f(name), msg = el.querySelector('.msg');
-  const empty = val(name === 'nick' ? 'nick' : name) === '';
-  // 비어 있는 채로 포커스만 벗어난 경우엔 오류를 띄우지 않음 (제출 시에만)
+  const el = f(name), msg = el.querySelector('.msg'), empty = val(name) === '';
   if (!force && (!touched[name] || empty)) { el.classList.remove('invalid', 'valid'); msg.textContent = hint[name] || ''; return true; }
   const err = empty ? '필수 입력 항목이에요.' : rules[name]();
   el.classList.toggle('invalid', !!err);
@@ -145,29 +216,23 @@ function show(name, force) {
   msg.textContent = err || okText[name];
   return !err;
 }
-
-// 각 입력창은 자기 자신만 검사한다
 for (const n of ['email', 'pw', 'pw2', 'nick']) {
   const input = $('#' + n);
   input.addEventListener('input', () => {
     touched[n] = true;
     if (n === 'nick') nickOk = false;
     show(n);
-    if (n === 'pw' && touched.pw2) show('pw2'); // 비번 변경 시, 확인창은 이미 입력했을 때만 재검사
+    if (n === 'pw' && touched.pw2) show('pw2');
   });
-  input.addEventListener('blur', () => show(n)); // 값이 있을 때만 검사, 포커스 이동만으로는 빨갛게 안 됨
+  input.addEventListener('blur', () => show(n));
 }
-
-// 비밀번호 보기/숨기기
 document.querySelectorAll('.eye').forEach(b => b.addEventListener('click', () => {
-  const i = $('#' + b.dataset.target), show = i.type === 'password';
-  i.type = show ? 'text' : 'password';
-  b.textContent = show ? '🙈' : '👁';
-  b.setAttribute('aria-pressed', show);
-  b.setAttribute('aria-label', show ? '비밀번호 숨기기' : '비밀번호 보기');
+  const i = $('#' + b.dataset.target), reveal = i.type === 'password';
+  i.type = reveal ? 'text' : 'password';
+  b.innerHTML = reveal ? EYE_OFF : EYE;
+  b.setAttribute('aria-pressed', reveal);
+  b.setAttribute('aria-label', reveal ? '비밀번호 숨기기' : '비밀번호 보기');
 }));
-
-// 닉네임 중복확인: 닉네임 필드만 영향
 $('#nickCheck').addEventListener('click', () => {
   touched.nick = true;
   const v = val('nick').trim(), el = f('nick'), msg = el.querySelector('.msg');
@@ -177,24 +242,13 @@ $('#nickCheck').addEventListener('click', () => {
   }
   nickOk = true; show('nick', true);
 });
-
-// 약관: 각 항목 독립 선택
-const terms = [...document.querySelectorAll('.term')];
-$('#all').addEventListener('change', e => { terms.forEach(t => t.checked = e.target.checked); $('#termsErr').textContent = ''; });
-terms.forEach(t => t.addEventListener('change', () => {
-  $('#all').checked = terms.every(x => x.checked); // 다른 항목은 건드리지 않음
-  if (terms.filter(x => x.dataset.req).every(x => x.checked)) $('#termsErr').textContent = '';
-}));
-
 $('#form').addEventListener('submit', e => {
   e.preventDefault();
   let firstBad = null;
   for (const n of ['email', 'pw', 'pw2', 'nick']) { touched[n] = true; if (!show(n, true) && !firstBad) firstBad = n; }
-  const termsOk = terms.filter(x => x.dataset.req).every(x => x.checked);
-  $('#termsErr').textContent = termsOk ? '' : '필수 약관에 동의해 주세요.';
   if (firstBad) return $('#' + firstBad).focus();
-  if (!termsOk) return;
-  alert('가입이 완료되었어요! (데모)');
+  $('#who').textContent = val('nick').trim();
+  go(3);
 });
 </script>
 </body>
