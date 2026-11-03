@@ -1,0 +1,24 @@
+/* ==========================================================
+   타이포그래피 토큰 — 글꼴 · 크기 · 굵기 · 줄 간격 · 자간
+   ========================================================== */
+:root{
+  --font-family-base:-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+
+  --font-size-12:12px;
+  --font-size-13:13px;
+  --font-size-14:14px;
+  --font-size-15:15px;
+  --font-size-16:16px;
+  --font-size-18:18px;
+  --font-size-22:22px;
+
+  --font-weight-regular:400;
+  --font-weight-semibold:600;
+  --font-weight-bold:700;
+  --font-weight-extrabold:800;
+
+  --line-height-title:1.35;
+  --line-height-body:1.5;
+
+  --letter-spacing-logo:-.5px;
+}

@@ -1,0 +1,50 @@
+/* ==========================================================
+   색상 토큰 — 글자색 · 배경색 · 테두리색
+   1) 팔레트(원색 값)  2) 용도별(시맨틱) 색상
+   색을 바꿀 때는 팔레트 값만 고치면 전체에 반영돼요.
+   ========================================================== */
+:root{
+  /* 1) 팔레트 */
+  --palette-terracotta-500:#B5532F;
+  --palette-terracotta-600:#984323;
+  --palette-terracotta-50:#FBEFE8;
+  --palette-warm-900:#2B2623;
+  --palette-warm-500:#7A716B;
+  --palette-warm-200:#E4DCD3;
+  --palette-warm-300:#D9CFC6;
+  --palette-warm-50:#FAF6F0;
+  --palette-white:#FFFFFF;
+  --palette-red-600:#D92D20;
+  --palette-green-700:#2E7D4F;
+  --palette-gray-700:#444444;
+  --palette-black:#000000;
+  --palette-kakao:#FEE500;
+  --palette-naver:#03C75A;
+
+  /* 2-1) 글자색 */
+  --color-text-primary:var(--palette-warm-900);
+  --color-text-secondary:var(--palette-warm-500);
+  --color-text-brand:var(--palette-terracotta-500);
+  --color-text-error:var(--palette-red-600);
+  --color-text-success:var(--palette-green-700);
+  --color-text-inverse:var(--palette-white);
+  --color-text-social-google:var(--palette-gray-700);
+
+  /* 2-2) 배경색 */
+  --color-bg-page:var(--palette-warm-50);
+  --color-bg-surface:var(--palette-white);
+  --color-bg-brand-subtle:var(--palette-terracotta-50);
+  --color-bg-brand:var(--palette-terracotta-500);
+  --color-bg-brand-hover:var(--palette-terracotta-600);
+  --color-bg-disabled:var(--palette-warm-300);
+  --color-bg-social-kakao:var(--palette-kakao);
+  --color-bg-social-naver:var(--palette-naver);
+  --color-bg-social-apple:var(--palette-black);
+  --color-bg-social-google:var(--palette-white);
+
+  /* 2-3) 테두리색 */
+  --color-border-default:var(--palette-warm-200);
+  --color-border-brand:var(--palette-terracotta-500);
+  --color-border-error:var(--palette-red-600);
+  --color-border-success:var(--palette-green-700);
+}

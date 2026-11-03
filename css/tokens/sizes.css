@@ -1,0 +1,20 @@
+/* ==========================================================
+   크기 토큰 — 컨트롤 높이 · 아이콘 · 레이아웃 폭
+   ========================================================== */
+:root{
+  --size-layout-max:440px;
+  --size-header:36px;
+  --size-back-width:44px;
+  --size-stepper-bar:4px;
+  --size-chip-height:42px;
+  --size-input-height:48px;
+  --size-cta-height:54px;
+  --size-checkbox:20px;
+  --size-icon-button:36px;
+  --size-icon:20px;
+  --size-input-padding-end:46px;
+  --size-social:52px;
+  --size-badge:64px;
+  --size-badge-icon:30px;
+  --size-hairline:1px;
+}
