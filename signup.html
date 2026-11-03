@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>모아집 회원가입</title>
+<!-- 디자인 시스템 토큰 -->
+<link rel="stylesheet" href="css/tokens/colors.css">
+<link rel="stylesheet" href="css/tokens/typography.css">
+<link rel="stylesheet" href="css/tokens/spacing.css">
+<link rel="stylesheet" href="css/tokens/radius.css">
+<link rel="stylesheet" href="css/tokens/effects.css">
+<link rel="stylesheet" href="css/tokens/sizes.css">
+<!-- 컴포넌트 스타일 -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="top">
+    <button class="back" id="back" type="button" hidden>← 이전</button>
+    <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>모아집</span>
+    <span class="top-spacer"></span>
+  </div>
+
+  <ol class="steps" id="steps" aria-label="가입 단계">
+    <li class="on">약관 동의</li><li>정보 입력</li><li>가입 완료</li>
+  </ol>
+
+  <div class="card">
+    <!-- 1단계: 약관 동의 -->
+    <section id="s1">
+      <h1>모아집에 오신 걸 환영해요</h1>
+      <p class="lead">가입을 위해 약관을 확인해 주세요.</p>
+      <div class="terms">
+        <div class="all-row">
+          <label class="t all"><input type="checkbox" id="all"> 전체 동의</label>
+          <label class="t all"><input type="checkbox" id="reqOnly"> 필수 항목만 동의</label>
+        </div>
+        <label class="t"><input type="checkbox" class="term" data-req="1"> 만 14세 이상이에요 <span class="tag must">필수</span></label>
+        <label class="t"><input type="checkbox" class="term" data-req="1"> 이용약관 <span class="tag must">필수</span> <a class="view" href="#">보기</a></label>
+        <label class="t"><input type="checkbox" class="term" data-req="1"> 개인정보 수집·이용 <span class="tag must">필수</span> <a class="view" href="#">보기</a></label>
+        <label class="t"><input type="checkbox" class="term"> 마케팅 활용 동의 <span class="tag">선택</span> <a class="view" href="#">보기</a></label>
+        <label class="t"><input type="checkbox" class="term"> 이벤트·쿠폰·특가 알림 <span class="tag">선택</span> <a class="view" href="#">보기</a></label>
+      </div>
+      <button type="button" class="terms-reset" id="reset">선택 해제</button>
+      <button class="cta" id="next1" type="button" disabled>다음</button>
+      <p class="hint" id="hint1">필수 약관에 동의하면 다음으로 넘어갈 수 있어요.</p>
+    </section>
+
+    <!-- 2단계: 정보 입력 -->
+    <section id="s2" hidden>
+      <h1>계정 정보를 입력해 주세요</h1>
+      <p class="lead">이메일과 비밀번호만 있으면 돼요.</p>
+      <p class="req-note"><b>*</b> 표시는 필수 입력 항목이에요</p>
+      <form id="form" novalidate>
+        <div class="field" data-name="email">
+          <label class="lb" for="email">이메일 <span class="req">*</span></label>
+          <div class="input"><input id="email" type="email" autocomplete="email" placeholder="example@moajip.com"></div>
+          <p class="msg" aria-live="polite"></p>
+        </div>
+        <div class="field" data-name="pw">
+          <label class="lb" for="pw">비밀번호 <span class="req">*</span></label>
+          <div class="input">
+            <input id="pw" type="password" autocomplete="new-password" placeholder="비밀번호를 입력해 주세요">
+            <button type="button" class="eye" data-target="pw" aria-label="비밀번호 보기" aria-pressed="false"></button>
+          </div>
+          <p class="msg" aria-live="polite">8자 이상, 영문과 숫자를 함께 사용해 주세요.</p>
+        </div>
+        <div class="field" data-name="pw2">
+          <label class="lb" for="pw2">비밀번호 확인 <span class="req">*</span></label>
+          <div class="input">
+            <input id="pw2" type="password" autocomplete="new-password" placeholder="비밀번호를 한 번 더 입력해 주세요">
+            <button type="button" class="eye" data-target="pw2" aria-label="비밀번호 확인 보기" aria-pressed="false"></button>
+          </div>
+          <p class="msg" aria-live="polite"></p>
+        </div>
+        <div class="field" data-name="nick">
+          <div class="lb-row">
+            <label class="lb" for="nick">닉네임 <span class="req">*</span></label>
+            <button type="button" class="btn-text" id="nickAuto">자동으로 정하기</button>
+          </div>
+          <div class="row">
+            <div class="input"><input id="nick" type="text" maxlength="15" placeholder="2~15자"></div>
+            <button type="button" class="btn-sub" id="nickCheck">중복확인</button>
+          </div>
+          <p class="msg" aria-live="polite"></p>
+        </div>
+        <button class="cta" type="submit">가입하기</button>
+      </form>
+    </section>
+
+    <!-- 3단계: 완료 -->
+    <section id="s3" hidden>
+      <div class="done-box">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h1><span id="who">회원</span>님, 가입이 끝났어요</h1>
+        <p class="lead">모아집에서 마음에 드는 공간을 찾아보세요.</p>
+        <div class="coupon">신규 가입 쿠폰이 도착했어요<b>10,000원</b></div>
+        <button class="cta" type="button" onclick="location.reload()">쇼핑 시작하기</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="js/common.js"></script>
+<script src="js/actions.js"></script>
+</body>
+</html>
