@@ -17,7 +17,8 @@
   --font-weight-bold:700;
   --font-weight-extrabold:800;
 
-  --line-height-title:1.35;
+  --line-height-title:1.5;
+  --line-height-tight:1.2;
   --line-height-body:1.5;
 
   --letter-spacing-logo:-.5px;
