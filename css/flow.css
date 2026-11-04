@@ -9,7 +9,11 @@ body.modal-open{overflow:hidden}
 .link-btn[aria-pressed=true]{color:var(--color-text-brand)}
 .link-row{display:flex;justify-content:space-between;align-items:center;margin-top:var(--space-2)}
 #s1 .cta{margin-top:var(--space-6)}
-#ok .link-btn{display:block;margin:var(--space-8) auto 0;color:var(--color-text-tertiary);font-weight:var(--font-weight-regular)}
+/* 로그아웃 · 회원 탈퇴: 카드 아래 오른쪽 구석에 작게 (숨기지는 않아요) */
+.account-links{display:flex;justify-content:flex-end;align-items:center;gap:var(--space-6);margin-top:var(--space-8);font-size:var(--font-size-12);color:var(--color-text-tertiary)}
+.account-links[hidden]{display:none}
+.corner-link{min-height:var(--size-button-sm);padding:0 var(--space-4);border:0;background:none;font-family:inherit;font-size:var(--font-size-12);color:var(--color-text-tertiary);cursor:pointer}
+.corner-link:hover{text-decoration:underline}
 
 /* 정보 입력: 제목은 위에 고정 */
 .s2-head{position:sticky;top:0;z-index:2;background:var(--color-bg-surface);margin:calc(-1 * var(--space-28)) calc(-1 * var(--space-22)) 0;padding:var(--space-28) var(--space-22) var(--space-8);border-radius:var(--radius-lg) var(--radius-lg) 0 0}

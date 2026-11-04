@@ -63,9 +63,9 @@ const store = (() => {
       const d = db(), x = d.users[u];
       if (!x || x.password !== pw) throw new Error('아이디 또는 비밀번호가 맞지 않아요.');
       if (x.withdrawnAt) throw new Error('탈퇴한 계정이에요. 다시 가입하시면 30일 안에 예전 내역을 불러올 수 있어요.');
-      localStorage.setItem(ME, u); return { username: u, nickname: x.nickname };
+      localStorage.setItem(ME, u); return { username: u, nickname: x.nickname, lifeEvent: x.lifeEvent };
     },
-    async me() { const d = db(), u = localStorage.getItem(ME); return u && d.users[u] && !d.users[u].withdrawnAt ? { username: u, nickname: d.users[u].nickname } : null; },
+    async me() { const d = db(), u = localStorage.getItem(ME); return u && d.users[u] && !d.users[u].withdrawnAt ? { username: u, nickname: d.users[u].nickname, lifeEvent: d.users[u].lifeEvent } : null; },
     async signOut() { localStorage.removeItem(ME); },
     async withdraw({ reason, keep }) {
       const d = db(), u = localStorage.getItem(ME), x = d.users[u];
@@ -109,10 +109,10 @@ const store = (() => {
     },
     async me(raw) {
       const { data: { user } } = await sb.auth.getUser(); if (!user) return null;
-      const { data } = await sb.from('profiles').select('username,nickname,withdrawn_at').eq('id', user.id).single();
+      const { data } = await sb.from('profiles').select('username,nickname,withdrawn_at,life_event').eq('id', user.id).single();
       if (!data) return null;
       if (data.withdrawn_at && !raw) return null;
-      return { username: data.username, nickname: data.nickname, withdrawn: !!data.withdrawn_at };
+      return { username: data.username, nickname: data.nickname, lifeEvent: data.life_event, withdrawn: !!data.withdrawn_at };
     },
     async signOut() { await sb.auth.signOut(); },
     async withdraw({ reason, keep }) {

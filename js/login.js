@@ -30,10 +30,22 @@
     } catch (err) { $('#loginAlert').textContent = err.message; }
   });
 
+  /* 로그인 후: 고른 생활 이벤트에 맞춰 첫 문구를 바꿔요 */
+  const OK_LEAD = {
+    move: '이사 준비 중이시죠?<br>새집에 어울리는 수납·조명부터 골라 봤어요.',
+    marry: '두 분의 첫 집을 위한<br>가구와 침구를 골라 봤어요.',
+    own: '나만의 첫 공간에 딱 맞는<br>작은 가구부터 골라 봤어요.',
+    baby: '아기와 함께할 공간을 위한<br>안전한 소품을 골라 봤어요.',
+    browse: '요즘 많이 찾는 인기 상품부터 둘러보세요.'
+  };
   window.showOk = me => {
     $$('.who').forEach(w => w.textContent = me.nickname);
+    $('#okLead').innerHTML = OK_LEAD[me.lifeEvent] || '모아집에서 마음에 드는 공간을 찾아보세요.';
     showSection('ok');
+    $('#accountLinks').hidden = false;
   };
+  $('#startShop').addEventListener('click', () => alert('데모: 여기서 쇼핑 화면으로 이동해요.'));
+  $('#showRecs').addEventListener('click', () => alert('데모: 여기서 추천 상품 목록으로 이동해요.'));
   $('#logout').addEventListener('click', async () => { await store.signOut(); location.hash = ''; window.route(); });
   $('#goWithdraw').addEventListener('click', () => { location.hash = '#withdraw'; });
 })();

@@ -56,6 +56,7 @@ function showSection(id, { steps = null, back = false } = {}) {
   $('#steps').hidden = steps === null;
   if (steps !== null) [...$('#steps').children].forEach((li, i) => { li.className = i + 1 < steps ? 'done' : i + 1 === steps ? 'on' : ''; });
   $('#back').hidden = !back;
+  const links = $('#accountLinks'); if (links) links.hidden = id !== 'ok';
   window.scrollTo(0, 0);
 }
 const fmtDate = t => { const d = new Date(t); return `${d.getMonth() + 1}월 ${d.getDate()}일`; };

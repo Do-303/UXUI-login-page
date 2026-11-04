@@ -63,14 +63,16 @@
       <p class="login">아직 계정이 없나요? <a href="#signup">회원가입</a></p>
     </section>
 
-    <!-- 로그인 완료 (마이페이지 대신) -->
+    <!-- 로그인 완료 -->
     <section id="ok" hidden>
       <div class="done-box">
-        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <h1><span class="who">회원</span>님, 로그인됐어요</h1>
-        <p class="lead">모아집에서 마음에 드는 공간을 찾아보세요.</p>
-        <button class="cta" type="button" id="logout">로그아웃</button>
-        <button class="link-btn" type="button" id="goWithdraw">회원 탈퇴</button>
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <h1><span class="who">회원</span>님, 쇼핑을 시작해 볼까요?</h1>
+        <p class="lead" id="okLead">모아집에서 마음에 드는 공간을 찾아보세요.</p>
+        <div class="done-actions">
+          <button class="cta" type="button" id="startShop">쇼핑 시작하기</button>
+          <button class="cta line" type="button" id="showRecs">추천 상품 보기</button>
+        </div>
       </div>
     </section>
 
@@ -249,6 +251,11 @@
       </div>
     </section>
   </div>
+  <nav class="account-links" id="accountLinks" aria-label="계정" hidden>
+    <button type="button" class="corner-link" id="logout">로그아웃</button>
+    <span aria-hidden="true">·</span>
+    <button type="button" class="corner-link" id="goWithdraw">회원 탈퇴</button>
+  </nav>
 </main>
 
 <!-- 본인인증 (데모: 통신사 선택 → 정보 입력) -->
