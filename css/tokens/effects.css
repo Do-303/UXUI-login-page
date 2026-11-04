@@ -4,4 +4,11 @@
 :root{
   --shadow-card:0 2px 14px rgba(0,0,0,.06);
   --focus-ring:0 0 0 3px rgba(53,197,240,.15);
+  --overlay-dim:rgba(0,0,0,.45);
+  --shadow-modal:0 8px 30px rgba(0,0,0,.18);
+  /* 움직임 */
+  --motion-door:.8s;
+  --motion-fade:.4s;
+  --ease-out:cubic-bezier(.2,.8,.2,1);
+  --ease-in-out:cubic-bezier(.65,0,.35,1);
 }
