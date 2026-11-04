@@ -1,4 +1,4 @@
-/* 로그인 동작: 입력 검증, 로그인 처리(데모) — 회원가입 코드와 이름이 겹치지 않게 감쌌어요 */
+/* 로그인 동작: 입력 검증, 로그인 처리(Supabase) — 회원가입 코드와 이름이 겹치지 않게 감쌌어요 */
 (() => {
   const touched = {};
   const rules = {
@@ -22,13 +22,14 @@
     input.addEventListener('blur', () => show(n));
   }
 
-  $('#loginForm').addEventListener('submit', e => {
+  $('#loginForm').addEventListener('submit', async e => {
     e.preventDefault();
     let firstBad = null;
     for (const n of ['loginEmail', 'loginPw']) { touched[n] = true; if (!show(n, true) && !firstBad) firstBad = n; }
     if (firstBad) return $('#' + firstBad).focus();
-    // 데모: 비밀번호가 8자 미만이면 로그인 실패로 처리
-    if (val('loginPw').length < 8) { $('#loginAlert').textContent = '이메일 또는 비밀번호가 맞지 않아요.'; return; }
+    // Supabase에 이메일·비밀번호가 맞는지 물어봐요
+    const { error } = await sb.auth.signInWithPassword({ email: val('loginEmail').trim(), password: val('loginPw') });
+    if (error) { $('#loginAlert').textContent = sbMessage(error); return; }
     $('#login').hidden = true;
     $('#ok').hidden = false;
   });

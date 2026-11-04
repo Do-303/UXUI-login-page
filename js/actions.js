@@ -129,11 +129,22 @@
     }
   }
 
-  $('#form').addEventListener('submit', e => {
+  $('#form').addEventListener('submit', async e => {
     e.preventDefault();
     let firstBad = null;
     for (const n of ['email', 'pw', 'pw2', 'nick']) { touched[n] = true; if (!show(n, true) && !firstBad) firstBad = n; }
     if (firstBad) return (firstBad === 'email' && returnPending ? $('#confirmReturn') : $('#' + firstBad)).focus();
+    // Supabase에 회원 정보를 저장하고, 인증 메일을 보내요 (닉네임도 같이 저장)
+    const btn = $('#signupBtn'); btn.disabled = true; $('#signupAlert').textContent = '';
+    const { data, error } = await sb.auth.signUp({
+      email: val('email').trim(),
+      password: val('pw'),
+      options: { data: { nickname: val('nick').trim() }, emailRedirectTo: location.origin + location.pathname }
+    });
+    btn.disabled = false;
+    // 이미 가입된 이메일이면 Supabase가 오류 대신 빈 identities를 돌려줘요
+    const dup = data && data.user && data.user.identities && data.user.identities.length === 0;
+    if (error || dup) { $('#signupAlert').textContent = dup ? '이미 가입된 이메일이에요.' : sbMessage(error); return; }
     $('#who').textContent = val('nick').trim();
     document.querySelectorAll('.who').forEach(w => w.textContent = val('nick').trim());
     go(3);
