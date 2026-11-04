@@ -47,7 +47,6 @@
     const built = completed.filter(Boolean).length;
     $('#house').innerHTML = houseSVG(built, cur + 1);
     $('#stepNum').textContent = `${cur + 1} / 4`;
-    $('#stepName').textContent = STEPS[cur].name;
     $('#stepSub').textContent = STEPS[cur].sub;
     $('#next2').disabled = false;
     $('#next2').textContent = cur === 3 ? '가입하기' : '다음';

@@ -102,11 +102,6 @@
       </div>
       <ul class="done-list" id="doneList" aria-label="입력을 마친 단계"></ul>
 
-      <div class="progress-house" id="progress" aria-live="polite">
-        <span class="house" id="house" aria-hidden="true"></span>
-        <span class="progress-text"><b id="stepNum">1 / 4</b> <strong id="stepName">본인인증</strong><small id="stepSub">집의 기초를 놓아요</small></span>
-      </div>
-
       <form id="form" novalidate>
         <!-- ① 본인인증 -->
         <div class="step" data-step="0">
@@ -172,6 +167,10 @@
             <div class="input"><input id="email" type="email" autocomplete="email" placeholder="example@moajip.com"></div>
             <p class="msg" aria-live="polite"></p>
           </div>
+        </div>
+        <div class="progress-house" id="progress" aria-live="polite">
+          <span class="house" id="house" aria-hidden="true"></span>
+          <span class="progress-text"><b id="stepNum">1 / 4</b><small id="stepSub">집의 기초를 놓아요</small></span>
         </div>
         <button class="cta" id="next2" type="submit" disabled>다음</button>
       </form>

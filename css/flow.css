@@ -26,12 +26,12 @@ body.modal-open{overflow:hidden}
 .done-row .link-btn{color:var(--color-text-brand);text-decoration:none}
 
 /* 집 짓기 진행 표시 */
-.progress-house{display:flex;align-items:center;gap:var(--space-10);margin:var(--space-12) 0 var(--space-12)}
+.progress-house{display:flex;align-items:center;gap:var(--space-10);margin:var(--space-20) 0 0}
 .house{width:var(--size-house);height:var(--size-house);flex:none}
 .house svg{display:block;width:100%;height:100%}
 .progress-text{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:var(--space-6);font-size:var(--font-size-13)}
 .progress-text b{color:var(--color-text-brand);font-size:var(--font-size-12)}
-.progress-text small{flex-basis:100%;font-size:var(--font-size-12);color:var(--color-text-tertiary)}
+.progress-text small{font-size:var(--font-size-13);color:var(--color-text-secondary)}
 .hs{fill:none;transition:fill .3s var(--ease-out),stroke .3s var(--ease-out)}
 .hs.todo{stroke:var(--color-illust-ghost);stroke-width:1.4;stroke-dasharray:2.5 2}
 .hs.cur{stroke:var(--color-text-brand);stroke-width:1.6;stroke-dasharray:2.5 2}
@@ -54,7 +54,8 @@ p.lb{font-size:var(--font-size-14);font-weight:var(--font-weight-bold);margin:0 
 .field[data-name=verify].valid .msg{color:var(--color-text-success)}
 .field[data-name=verify].invalid .msg{color:var(--color-text-error)}
 .returning{margin:var(--space-16) 0 0}
-#s2 .cta{margin-top:var(--space-20)}
+#s2 .cta{margin-top:var(--space-12)}
+.step{margin-top:var(--space-16)}
 #s2 .msg:empty{display:none}
 
 /* 팝업 */
