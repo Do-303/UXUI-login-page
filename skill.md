@@ -188,18 +188,19 @@ description: 가상의 인테리어 쇼핑몰 "모아집"(GitHub siney0051/UXUI-
 
 ## 8. 코드
 
-- 브랜치: `feature/new-signup-flow` (main 에는 아직 안 합쳤어요)
+- 브랜치: `main` 에 합쳤어요 (fork `Do-303/UXUI-login-page`). 원래 저장소에 넣으려면 fork 에서 PR 을 열어요
 - 파일
   - `index.html` 모든 화면 · 팝업 3개(본인인증, 가입 확인, 생활 이벤트)
   - `css/flow.css` 새 흐름 스타일 (값은 모두 토큰), `css/tokens/` 에 그림색·팝업·움직임 토큰 추가
-  - `js/config.js` Supabase URL · anon key (비우면 데모 모드)
+  - `js/config.js` Supabase URL · 공개용 키 — 모아집 프로젝트가 연결돼 있어요 (비우면 데모 모드)
   - `js/store.js` 저장소 — Supabase 또는 데모(localStorage). 화면 코드는 `store.xxx()`만 불러요
   - `js/house.js` 생활 이벤트 목록 · 집 그림 · 문 장면
   - `js/actions.js` 가입 흐름 · `js/login.js` 로그인·로그인 후 화면 · `js/withdraw.js` 탈퇴 · `js/common.js` 공통(팝업, 화면 전환)
   - `supabase/schema.sql` 테이블 · 보안 규칙(RLS) · 함수 (아이디 중복확인, 탈퇴 기록 찾기, 탈퇴, 골라서 복원)
 - 데모 모드 시험 데이터: `이수진 / 970707` (3일 전 탈퇴, 보관) · `김예전 / 880101` (45일 전 탈퇴)
 - 주소 끝에 `?video=1`을 붙이면 "데모 모드" 안내 글씨가 숨어요 (녹화용)
-- Supabase 연결: `schema.sql` 실행 → Authentication 에서 Confirm email 끄기 → `config.js`에 URL·anon key (service_role key 금지)
+- Supabase 연결: `config.js` 에 키는 넣어 뒀어요. 대시보드에서 `schema.sql` 실행 + Authentication 에서 Confirm email 끄기를 해야 실제로 가입돼요 (service_role / secret key 는 절대 코드에 넣지 않아요)
+- 예전 main 의 이메일 로그인 Supabase 연결(`js/supabase.js`)은 새 흐름(`js/store.js`)으로 바뀌었어요
 
 ## 9. 접근성 (모아집에서 특히)
 

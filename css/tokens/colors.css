@@ -22,6 +22,16 @@
   --palette-naver:#03C75A;
   --palette-gray-100:#F5F5F5;
   --palette-warm-400:#888888;
+  /* 문 열림 · 집 그림용 (장식) */
+  --palette-cream-100:#FFF3D1;
+  --palette-yellow-300:#FFE08A;
+  --palette-sand-300:#EBCB9F;
+  --palette-sand-500:#C49A6C;
+  --palette-rose-300:#FF8FA3;
+  --palette-rose-100:#FFD1DC;
+  --palette-mint-400:#5BBF86;
+  --palette-amber-400:#F2B53A;
+  --palette-sky-200:#BFE6FF;
 
   /* 2-1) 글자색 */
   --color-text-primary:var(--palette-warm-900);
@@ -45,6 +55,19 @@
   --color-bg-social-naver:var(--palette-naver);
   --color-bg-social-apple:var(--palette-black);
   --color-bg-social-google:var(--palette-white);
+  --color-bg-danger:var(--palette-red-600);
+  --color-bg-brand-strong:var(--palette-terracotta-600);
+  /* 2-4) 그림(장식)색 — 문 열림 · 집 짓기 */
+  --color-illust-light:var(--palette-cream-100);
+  --color-illust-glow:var(--palette-yellow-300);
+  --color-illust-box:var(--palette-sand-300);
+  --color-illust-box-line:var(--palette-sand-500);
+  --color-illust-heart:var(--palette-rose-300);
+  --color-illust-shoe-pink:var(--palette-rose-100);
+  --color-illust-shoe-blue:var(--palette-sky-200);
+  --color-illust-leaf:var(--palette-mint-400);
+  --color-illust-key:var(--palette-amber-400);
+  --color-illust-ghost:var(--palette-warm-300);
 
   /* 2-3) 테두리색 */
   --color-border-default:var(--palette-warm-200);

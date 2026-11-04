@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="css/tokens/sizes.css">
 <!-- 컴포넌트 스타일 -->
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/flow.css">
 </head>
 <body>
 <main class="wrap">
@@ -26,15 +27,17 @@
     <li class="on">약관 동의</li><li>정보 입력</li><li>가입 완료</li>
   </ol>
 
+  <p class="mode-badge" id="modeBadge" hidden></p>
+
   <div class="card">
     <!-- 로그인 -->
     <section id="login">
       <h1>다시 만나 반가워요</h1>
       <p class="lead">로그인하고 나만의 공간을 채워보세요.</p>
       <form id="loginForm" class="login-form" novalidate>
-        <div class="field" data-name="loginEmail">
-          <label class="lb" for="loginEmail">이메일</label>
-          <div class="input"><input id="loginEmail" type="email" autocomplete="email" placeholder="example@moajip.com"></div>
+        <div class="field" data-name="loginId">
+          <label class="lb" for="loginId">아이디</label>
+          <div class="input"><input id="loginId" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="아이디를 입력해 주세요"></div>
           <p class="msg" aria-live="polite"></p>
         </div>
         <div class="field" data-name="loginPw">
@@ -48,7 +51,7 @@
         <p class="alert" id="loginAlert" role="alert"></p>
         <button class="cta" type="submit">로그인</button>
       </form>
-      <div class="find-links"><a href="#">이메일 찾기</a><span class="bar" aria-hidden="true"></span><a href="#">비밀번호 찾기</a></div>
+      <div class="find-links"><a href="#">아이디 찾기</a><span class="bar" aria-hidden="true"></span><a href="#">비밀번호 찾기</a></div>
 
       <div class="divider">또는 간편 로그인</div>
       <div class="sns">
@@ -63,134 +66,254 @@
     <!-- 로그인 완료 -->
     <section id="ok" hidden>
       <div class="done-box">
-        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <h1>로그인됐어요</h1>
-        <p class="lead">모아집에서 마음에 드는 공간을 찾아보세요.</p>
-        <button class="cta" type="button" onclick="location.reload()">쇼핑 시작하기</button>
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <h1><span class="who">회원</span>님, 쇼핑을 시작해 볼까요?</h1>
+        <p class="lead" id="okLead">모아집에서 마음에 드는 공간을 찾아보세요.</p>
+        <div class="done-actions">
+          <button class="cta" type="button" id="startShop">쇼핑 시작하기</button>
+          <button class="cta line" type="button" id="showRecs">추천 상품 보기</button>
+        </div>
       </div>
     </section>
+
     <!-- 1단계: 약관 동의 -->
     <section id="s1" hidden>
       <h1>모아집에 오신 걸 환영해요</h1>
       <p class="lead">가입을 위해 약관을 확인해 주세요.</p>
       <div class="terms">
-        <div class="all-row">
-          <label class="t all"><input type="checkbox" id="all"> 전체 동의</label>
-          <label class="t all"><input type="checkbox" id="reqOnly"> 필수 항목만 동의</label>
-        </div>
+        <label class="t all"><input type="checkbox" id="all"> 전체 동의</label>
         <label class="t"><input type="checkbox" class="term" data-req="1"> 만 14세 이상이에요 <span class="tag must">필수</span></label>
         <label class="t"><input type="checkbox" class="term" data-req="1"> 이용약관 <span class="tag must">필수</span> <a class="view" href="#">보기</a></label>
         <label class="t"><input type="checkbox" class="term" data-req="1"> 개인정보 수집·이용 <span class="tag must">필수</span> <a class="view" href="#">보기</a></label>
         <label class="t"><input type="checkbox" class="term"> 마케팅 활용 동의 <span class="tag">선택</span> <a class="view" href="#">보기</a></label>
         <label class="t"><input type="checkbox" class="term"> 이벤트·쿠폰·특가 알림 <span class="tag">선택</span> <a class="view" href="#">보기</a></label>
       </div>
-      <button type="button" class="terms-reset" id="reset">선택 해제</button>
+      <div class="link-row">
+        <button type="button" class="link-btn" id="reqOnly" aria-pressed="false">필수 항목만 동의</button>
+        <button type="button" class="link-btn" id="reset">선택 해제</button>
+      </div>
       <button class="cta" id="next1" type="button" disabled>다음</button>
       <p class="hint" id="hint1">필수 약관에 동의하면 다음으로 넘어갈 수 있어요.</p>
     </section>
 
-    <!-- 2단계: 정보 입력 -->
+    <!-- 2단계: 정보 입력 (한 단계씩, 끝난 단계는 한 줄로 접혀요) -->
     <section id="s2" hidden>
-      <h1>계정 정보를 입력해 주세요</h1>
-      <p class="lead">이메일과 비밀번호만 있으면 돼요.</p>
-      <p class="req-note"><b>*</b> 표시는 필수 입력 항목이에요</p>
+      <div class="s2-head">
+        <h1>계정 정보를 입력해 주세요</h1>
+        <p class="lead">한 단계씩 차례로 입력해 주세요.</p>
+      </div>
+      <ul class="done-list" id="doneList" aria-label="입력을 마친 단계"></ul>
+
       <form id="form" novalidate>
-        <div class="field" data-name="email">
-          <label class="lb" for="email">이메일 <span class="req">*</span></label>
-          <div class="row">
+        <!-- ① 본인인증 -->
+        <div class="step" data-step="0">
+          <div class="field" data-name="verify">
+            <p class="lb">본인인증 <span class="req">*</span></p>
+            <button type="button" class="btn-block" id="openVerify">휴대폰으로 본인인증하기</button>
+            <p class="msg" aria-live="polite">한 분께 한 번만 드리는 신규 가입 혜택을 지키기 위해 본인 확인을 해요.</p>
+          </div>
+          <div class="returning" id="returning" role="group" aria-labelledby="returningTitle" hidden>
+            <p class="returning-title" id="returningTitle">혹시 돌아오신 건가요?</p>
+            <p class="returning-body">이전에 모아집을 이용하셨던 분이에요.<br>다시 오신 게 맞다면 확인해 주세요.</p>
+            <div class="returning-actions">
+              <button type="button" class="btn-line" id="notMe">제가 아니에요</button>
+              <button type="button" class="btn-fill" id="confirmReturn">네, 맞아요</button>
+            </div>
+          </div>
+        </div>
+        <!-- ② 아이디 -->
+        <div class="step" data-step="1" hidden>
+          <div class="field" data-name="uid">
+            <label class="lb" for="uid">아이디 <span class="req">*</span></label>
+            <div class="row">
+              <div class="input"><input id="uid" type="text" maxlength="20" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="아이디를 입력해 주세요"></div>
+              <button type="button" class="btn-sub" id="uidCheck">중복확인</button>
+            </div>
+            <p class="msg" aria-live="polite"></p>
+          </div>
+        </div>
+        <!-- ③ 비밀번호 + 비밀번호 확인 (같이 접혀요) -->
+        <div class="step" data-step="2" hidden>
+          <div class="field" data-name="pw">
+            <label class="lb" for="pw">비밀번호 <span class="req">*</span></label>
+            <div class="input">
+              <input id="pw" type="password" autocomplete="new-password" placeholder="비밀번호를 입력해 주세요">
+              <button type="button" class="eye" data-target="pw" aria-label="비밀번호 보기" aria-pressed="false"></button>
+            </div>
+            <p class="msg" aria-live="polite"></p>
+          </div>
+          <div class="field" data-name="pw2">
+            <label class="lb" for="pw2">비밀번호 확인 <span class="req">*</span></label>
+            <div class="input">
+              <input id="pw2" type="password" autocomplete="new-password" placeholder="비밀번호를 한 번 더 입력해 주세요">
+              <button type="button" class="eye" data-target="pw2" aria-label="비밀번호 확인 보기" aria-pressed="false"></button>
+            </div>
+            <p class="msg" aria-live="polite"></p>
+          </div>
+        </div>
+        <!-- ④ 닉네임 + 이메일(선택) -->
+        <div class="step" data-step="3" hidden>
+          <div class="field" data-name="nick">
+            <div class="lb-row">
+              <label class="lb" for="nick">닉네임 <span class="req">*</span></label>
+              <button type="button" class="btn-text" id="nickAuto">자동으로 정하기</button>
+            </div>
+            <div class="row">
+              <div class="input"><input id="nick" type="text" maxlength="15" placeholder="2~15자"></div>
+              <button type="button" class="btn-sub" id="nickCheck">중복확인</button>
+            </div>
+            <p class="msg" aria-live="polite"></p>
+          </div>
+          <div class="field" data-name="email">
+            <label class="lb" for="email">이메일 (선택)</label>
             <div class="input"><input id="email" type="email" autocomplete="email" placeholder="example@moajip.com"></div>
-            <button type="button" class="btn-sub" id="emailVerify">인증하기</button>
-          </div>
-          <p class="msg" aria-live="polite"></p>
-        </div>
-        <!-- 탈퇴 이력이 있는 이메일을 인증하면 보여요 -->
-        <div class="returning" id="returning" role="group" aria-labelledby="returningTitle" hidden>
-          <p class="returning-title" id="returningTitle">혹시 돌아오신 건가요?</p>
-          <p class="returning-body">이전에 모아집을 이용하셨던 이메일이에요.<br>다시 돌아오신 게 맞다면 확인해 주세요.</p>
-          <div class="returning-actions">
-            <button type="button" class="btn-line" id="otherEmail">다른 이메일 쓰기</button>
-            <button type="button" class="btn-fill" id="confirmReturn">네, 맞아요</button>
+            <p class="msg" aria-live="polite"></p>
           </div>
         </div>
-        <div class="field" data-name="pw">
-          <label class="lb" for="pw">비밀번호 <span class="req">*</span></label>
-          <div class="input">
-            <input id="pw" type="password" autocomplete="new-password" placeholder="비밀번호를 입력해 주세요">
-            <button type="button" class="eye" data-target="pw" aria-label="비밀번호 보기" aria-pressed="false"></button>
-          </div>
-          <p class="msg" aria-live="polite">8자 이상, 영문과 숫자를 함께 사용해 주세요.</p>
+        <div class="progress-house" id="progress" aria-live="polite">
+          <span class="house" id="house" aria-hidden="true"></span>
+          <span class="progress-text"><b id="stepNum">1 / 4</b><small id="stepSub">집의 기초를 놓아요</small></span>
         </div>
-        <div class="field" data-name="pw2">
-          <label class="lb" for="pw2">비밀번호 확인 <span class="req">*</span></label>
-          <div class="input">
-            <input id="pw2" type="password" autocomplete="new-password" placeholder="비밀번호를 한 번 더 입력해 주세요">
-            <button type="button" class="eye" data-target="pw2" aria-label="비밀번호 확인 보기" aria-pressed="false"></button>
-          </div>
-          <p class="msg" aria-live="polite"></p>
-        </div>
-        <div class="field" data-name="nick">
-          <div class="lb-row">
-            <label class="lb" for="nick">닉네임 <span class="req">*</span></label>
-            <button type="button" class="btn-text" id="nickAuto">자동으로 정하기</button>
-          </div>
-          <div class="row">
-            <div class="input"><input id="nick" type="text" maxlength="15" placeholder="2~15자"></div>
-            <button type="button" class="btn-sub" id="nickCheck">중복확인</button>
-          </div>
-          <p class="msg" aria-live="polite"></p>
-        </div>
-        <p class="alert" id="signupAlert" role="alert"></p>
-        <button class="cta" type="submit" id="signupBtn">가입하기</button>
+        <button class="cta" id="next2" type="submit" disabled>다음</button>
       </form>
     </section>
 
-    <!-- 3단계: 완료 -->
+    <!-- 3단계: 가입 완료 (문 열림) -->
     <section id="s3" hidden>
-      <div class="done-box">
-        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <h1><span id="who">회원</span>님, 가입이 끝났어요</h1>
-        <p class="lead">메일함에서 인증 링크를 누르면 로그인할 수 있어요.</p>
-        <div class="coupon">신규 가입 쿠폰이 도착했어요<b>10,000원</b></div>
-        <button class="cta" type="button" onclick="location.reload()">쇼핑 시작하기</button>
+      <div class="done-box" id="doneBox">
+        <div class="door-scene" id="doorScene" aria-hidden="true"></div>
+        <!-- 처음 가입 -->
+        <div class="done-variant" id="doneNew">
+          <h1 class="rise"><span class="who">회원</span>님, 가입이 끝났어요</h1>
+          <p class="lead rise" id="doneLead">모아집에서 마음에 드는 공간을 찾아보세요.</p>
+          <div class="coupon rise" id="coupon">신규 가입 쿠폰이 도착했어요<b>10,000원</b></div>
+          <button class="cta rise" type="button" data-home>쇼핑 시작하기</button>
+        </div>
+        <!-- 재가입 · 30일 이내: 골라서 불러오기 -->
+        <div class="done-variant" id="doneRestore" hidden>
+          <h1 class="rise"><span class="who">회원</span>님, 다시 만나서 반가워요</h1>
+          <p class="lead rise" id="restoreLead">두고 가신 것들을 챙겨 뒀어요.<br>불러올 항목을 골라 주세요.</p>
+          <fieldset class="restore rise">
+            <legend class="sr-only">불러올 항목</legend>
+            <label class="restore-row"><span><input type="checkbox" checked data-item="orders"> 주문 내역</span><b id="rOrders">0건</b></label>
+            <label class="restore-row"><span><input type="checkbox" checked data-item="cart"> 장바구니</span><b id="rCart">0개</b></label>
+            <label class="restore-row"><span><input type="checkbox" checked data-item="points"> 포인트</span><b id="rPoints">0P</b></label>
+            <label class="restore-row"><span><input type="checkbox" checked data-item="wishes"> 관심상품</span><b id="rWishes">0개</b></label>
+            <p class="restore-note" id="rDeadline"></p>
+          </fieldset>
+          <div class="done-actions rise">
+            <button class="cta" type="button" id="doRestore">선택한 내역 불러오기</button>
+            <button class="cta line" type="button" data-home>새로 시작할게요</button>
+            <p class="done-warn">새로 시작하면 예전 내역은 바로 지워지고<br>다시 불러올 수 없어요.</p>
+          </div>
+        </div>
+        <!-- 재가입 · 30일 지남 또는 보관 안 함 -->
+        <div class="done-variant" id="doneOld" hidden>
+          <h1 class="rise"><span class="who">회원</span>님, 다시 만나서 반가워요</h1>
+          <p class="lead rise">모아집에 다시 가입해 주셔서 고마워요.</p>
+          <div class="notice rise"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span id="oldNotice">탈퇴한 지 30일이 지나 예전 내역은 불러올 수 없어요.</span></div>
+          <button class="cta rise" type="button" data-home>쇼핑 시작하기</button>
+        </div>
       </div>
     </section>
 
-    <!-- 재가입 완료: 탈퇴 후 30일 이내 (예전 내역 불러오기) -->
-    <section id="s3r" hidden>
-      <div class="done-box">
-        <svg class="hero" viewBox="0 0 314 80" aria-hidden="true"><rect class="hero-bg" x="125" y="8" width="64" height="64" rx="32"/><path class="hero-line" d="M160.75 51.25V41.25C160.75 40.9185 160.618 40.6005 160.384 40.3661C160.149 40.1317 159.831 40 159.5 40H154.5C154.168 40 153.851 40.1317 153.616 40.3661C153.382 40.6005 153.25 40.9185 153.25 41.25V51.25"/><path class="hero-line" d="M145.75 37.5C145.75 37.1363 145.829 36.777 145.982 36.4472C146.135 36.1173 146.358 35.8248 146.636 35.59L155.386 28.0913C155.837 27.7099 156.409 27.5007 157 27.5007C157.591 27.5007 158.163 27.7099 158.614 28.0913L167.364 35.59C167.642 35.8248 167.865 36.1173 168.018 36.4472C168.171 36.777 168.25 37.1363 168.25 37.5V48.7501C168.25 49.4131 167.987 50.0489 167.518 50.5177C167.049 50.9867 166.413 51.25 165.75 51.25H148.25C147.587 51.25 146.951 50.9867 146.482 50.5177C146.013 50.0489 145.75 49.4131 145.75 48.7501V37.5Z"/><circle class="hero-dot" cx="97" cy="15" r="5"/><circle class="hero-dot" cx="81" cy="47" r="3" fill-opacity="0.5"/><circle class="hero-bg" cx="116" cy="70" r="4"/><circle class="hero-bg" cx="218" cy="10" r="4"/><circle class="hero-dot" cx="233" cy="45" r="5" fill-opacity="0.6"/><circle class="hero-dot" cx="209" cy="67" r="3"/></svg>
-        <h1><span class="who">회원</span>님, 다시 만나서 반가워요</h1>
-        <p class="lead">탈퇴 전 기록이 아직 남아 있어요.<br>예전 내역을 다시 불러올까요?</p>
-        <div class="restore">
-          <div class="restore-row"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><path d="m3.3 7 7.703 4.734a2 2 0 0 0 2.004 0L20.7 7"/><path d="m7.5 4.27 9 5.15"/></svg>주문 내역</span><b id="rOrders">0건</b></div>
-          <div class="restore-row"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>스크랩</span><b id="rScraps">0개</b></div>
-          <p class="restore-note" id="rDeadline"></p>
-        </div>
-        <div class="done-actions">
-          <button class="cta" type="button" onclick="location.reload()">예전 내역 불러오기</button>
-          <button class="cta line" type="button" onclick="location.reload()">새로 시작할게요</button>
-          <p class="done-warn">새로 시작하면 예전 내역은 바로 지워지고<br>다시 불러올 수 없어요.</p>
-        </div>
-      </div>
+    <!-- 탈퇴 1: 사유 -->
+    <section id="w1" hidden>
+      <h1>떠나시는 이유를<br>알려 주시겠어요?</h1>
+      <p class="skip-note">선택하지 않아도 탈퇴할 수 있어요</p>
+      <fieldset class="reasons" id="reasons">
+        <legend class="sr-only">탈퇴 사유 (선택)</legend>
+      </fieldset>
+      <button class="cta" type="button" id="toW2">탈퇴할게요</button>
     </section>
 
-    <!-- 재가입 완료: 탈퇴 후 30일이 지남 -->
-    <section id="s3o" hidden>
+    <!-- 탈퇴 2: 30일 보관 선택 -->
+    <section id="w2" hidden>
+      <h1>혹시 다시 오실 수도 있다면</h1>
+      <p class="lead">주문 내역·장바구니·포인트·관심상품을<br>30일간 보관해 둘까요?</p>
+      <fieldset class="keep">
+        <legend class="sr-only">보관 여부</legend>
+        <label class="keep-opt"><input type="radio" name="keep" value="1" checked><span><b>보관해 주세요</b><small>30일 안에 다시 오시면 원하는 내역만 골라서 불러올 수 있어요. 30일이 지나면 자동으로 지워져요.</small></span></label>
+        <label class="keep-opt"><input type="radio" name="keep" value="0"><span><b>모두 지워 주세요</b><small>탈퇴와 함께 바로 지워지고 다시 불러올 수 없어요.</small></span></label>
+      </fieldset>
+      <p class="benefit-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>다시 가입하셔도 신규 가입 혜택은 받을 수 없어요.</p>
+      <button class="cta danger" type="button" id="doWithdraw">탈퇴하기</button>
+    </section>
+
+    <!-- 탈퇴 3: 완료 -->
+    <section id="w3" hidden>
       <div class="done-box">
-        <svg class="hero" viewBox="0 0 314 80" aria-hidden="true"><rect class="hero-bg" x="125" y="8" width="64" height="64" rx="32"/><path class="hero-line" d="M160.75 51.25V41.25C160.75 40.9185 160.618 40.6005 160.384 40.3661C160.149 40.1317 159.831 40 159.5 40H154.5C154.168 40 153.851 40.1317 153.616 40.3661C153.382 40.6005 153.25 40.9185 153.25 41.25V51.25"/><path class="hero-line" d="M145.75 37.5C145.75 37.1363 145.829 36.777 145.982 36.4472C146.135 36.1173 146.358 35.8248 146.636 35.59L155.386 28.0913C155.837 27.7099 156.409 27.5007 157 27.5007C157.591 27.5007 158.163 27.7099 158.614 28.0913L167.364 35.59C167.642 35.8248 167.865 36.1173 168.018 36.4472C168.171 36.777 168.25 37.1363 168.25 37.5V48.7501C168.25 49.4131 167.987 50.0489 167.518 50.5177C167.049 50.9867 166.413 51.25 165.75 51.25H148.25C147.587 51.25 146.951 50.9867 146.482 50.5177C146.013 50.0489 145.75 49.4131 145.75 48.7501V37.5Z"/><circle class="hero-dot" cx="97" cy="15" r="5"/><circle class="hero-dot" cx="81" cy="47" r="3" fill-opacity="0.5"/><circle class="hero-bg" cx="116" cy="70" r="4"/><circle class="hero-bg" cx="218" cy="10" r="4"/><circle class="hero-dot" cx="233" cy="45" r="5" fill-opacity="0.6"/><circle class="hero-dot" cx="209" cy="67" r="3"/></svg>
-        <h1><span class="who">회원</span>님, 다시 만나서 반가워요</h1>
-        <p class="lead">모아집에 다시 가입해 주셔서 고마워요.</p>
-        <div class="notice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span>탈퇴한 지 30일이 지나 예전 주문·스크랩 내역은 불러올 수 없어요.</span></div>
-        <button class="cta" type="button" onclick="location.reload()">쇼핑 시작하기</button>
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+        <h1>그동안 함께해 주셔서 고마워요</h1>
+        <p class="lead">새로운 공간이 필요할 때<br>언제든 다시 찾아 주세요.</p>
+        <div class="notice" id="keepNotice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span id="keepText"></span></div>
+        <button class="cta" type="button" data-home>모아집 홈으로</button>
       </div>
     </section>
   </div>
+  <nav class="account-links" id="accountLinks" aria-label="계정" hidden>
+    <button type="button" class="corner-link" id="logout">로그아웃</button>
+    <span aria-hidden="true">·</span>
+    <button type="button" class="corner-link" id="goWithdraw">회원 탈퇴</button>
+  </nav>
 </main>
 
+<!-- 본인인증 (데모: 통신사 선택 → 정보 입력) -->
+<div class="modal" id="verifyModal" role="dialog" aria-modal="true" aria-labelledby="verifyTitle" hidden>
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="verifyTitle">본인인증을 해 주세요</h2><button type="button" class="x" data-close aria-label="닫기"></button></div>
+    <div id="vStep1">
+      <p class="lead">이용 중인 통신사를 골라 주세요.</p>
+      <div class="carriers" role="radiogroup" aria-label="통신사">
+        <button type="button" role="radio" aria-checked="true" class="carrier on">SKT</button>
+        <button type="button" role="radio" aria-checked="false" class="carrier">KT</button>
+        <button type="button" role="radio" aria-checked="false" class="carrier">LG U+</button>
+        <button type="button" role="radio" aria-checked="false" class="carrier">알뜰폰</button>
+      </div>
+      <div class="why"><b>왜 본인인증을 하나요?</b><span>한 분께 한 번만 드리는 신규 가입 혜택을 지키기 위해 본인 확인을 해요. 받은 정보는 가입 확인에만 써요.</span></div>
+      <button class="cta" type="button" id="vNext">다음</button>
+    </div>
+    <div id="vStep2" hidden>
+      <p class="lead" id="vLead">휴대폰으로 인증번호를 보내 드려요.</p>
+      <div class="field" data-name="vName"><label class="lb" for="vName">이름</label><div class="input"><input id="vName" type="text" autocomplete="name"></div></div>
+      <div class="field" data-name="vBirth"><label class="lb" for="vBirth">생년월일 6자리</label><div class="input"><input id="vBirth" type="text" inputmode="numeric" maxlength="6" placeholder="예: 990315"></div></div>
+      <div class="field" data-name="vPhone"><label class="lb" for="vPhone">휴대폰 번호</label><div class="row"><div class="input"><input id="vPhone" type="text" inputmode="numeric" maxlength="13" placeholder="010-0000-0000"></div><button type="button" class="btn-sub" id="vSend">인증번호 받기</button></div></div>
+      <div class="field" data-name="vCode"><label class="lb" for="vCode">인증번호</label><div class="input"><input id="vCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="숫자 6자리"></div><p class="msg" id="vMsg" aria-live="polite"></p></div>
+      <button class="cta" type="button" id="vDone">인증 완료하기</button>
+      <p class="demo-note">데모용 가짜 인증이에요. 인증번호는 아무 숫자 6자리나 넣으면 돼요.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 가입 정보 확인 -->
+<div class="modal" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" hidden>
+  <div class="sheet">
+    <h2 id="confirmTitle">이 정보로 가입할까요?</h2>
+    <p class="lead">가입하기 전에 한 번 더 확인해 주세요.</p>
+    <dl class="summary" id="summary"></dl>
+    <p class="small-note">비밀번호는 보안을 위해 보여 드리지 않아요.</p>
+    <div class="btn-pair"><button type="button" class="cta line" data-close>다시 볼게요</button><button type="button" class="cta" id="doSignup">가입하기</button></div>
+  </div>
+</div>
+
+<!-- 생활 이벤트 -->
+<div class="modal" id="eventModal" role="dialog" aria-modal="true" aria-labelledby="eventTitle" hidden>
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="eventTitle">어떤 일로 모아집에 오셨어요?</h2><button type="button" class="x" data-close aria-label="건너뛰기"></button></div>
+    <p class="lead">알려 주시면 꼭 맞는 상품을 먼저 보여 드릴게요.</p>
+    <fieldset class="events" id="events"><legend class="sr-only">생활 이벤트 (선택)</legend></fieldset>
+    <p class="small-note">마이페이지에서 언제든 바꿀 수 있어요.</p>
+    <div class="btn-pair"><button type="button" class="cta line" data-close>건너뛰기</button><button type="button" class="cta" id="eventDone" disabled>선택 완료</button></div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase.js"></script>
+<script src="js/config.js"></script>
 <script src="js/common.js"></script>
+<script src="js/store.js"></script>
+<script src="js/house.js"></script>
 <script src="js/login.js"></script>
 <script src="js/actions.js"></script>
+<script src="js/withdraw.js"></script>
 </body>
 </html>
